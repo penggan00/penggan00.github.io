@@ -34,7 +34,7 @@ body {
 
 pre {
     position: relative; /* 相对定位 */
-    padding: 9px; /* 内边距 */
+    padding: 8px; /* 内边距 */
     background-color: #000;
     color: #fff;
     border-radius: 5px; /* 圆角 */
@@ -52,17 +52,24 @@ pre {
     text-decoration: none; /* 去除下划线 */
 }
 
-.content{
-
+.content { 
+    font-size: 16px; /* 设置字体大小 */
+    text-decoration: none; /* 去除下划线 */
 }
 
-h1 { 
+.content a{ 
+    font-size: 16px; /* 设置字体大小 */
+    text-decoration: none; /* 去除下划线 */
+}
+
+.subheader h1 { 
     font-size: 19px; /* 设置字体大小 */
-    white-space: nowrap;
+    text-decoration: none; /* 去除下划线 */
 }  
 
-h2, h3, h4, h5, h6 { 
+h1,h2, h3, h4, h5, h6 { 
     font-size: 17px; /* 设置字体大小 */
+    text-decoration: none; /* 去除下划线 */
 }  
 
 .copy-button {
@@ -99,6 +106,7 @@ code {
     text-decoration: none; /* 去除下划线 */
     margin-top: 20px; /* 上边距6px */
 }
+
 
 .date { /* 设置date类的样式 */
     text-align: center; /* 设置文字居中 */
@@ -145,16 +153,18 @@ footer a {
 }
 
 @media (max-width: 800px) { /* 设置媒体查询，当屏幕宽度小于800px时应用以下样式 */
-    body {
-        font-size: 0.97em; /* 设置字体大小 */
-    }
-
-    h1 { 
-        font-size: 1.16em; /* 设置字体大小 */
-    }  
-
-    h2, h3, h4, h5, h6 {
+    
+   
+    h1, h2, h3, h4, h5, h6 {
         font-size: 1em; /* 设置字体大小 */
     }  
+    .subheader h1 { 
+        font-size: 1em; /* 设置字体大小 */
+    }  
+    .content{ 
+        font-size: 0.96em; /* 设置字体大小 */
+    }  
+   
+
 
 }
