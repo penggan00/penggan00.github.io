@@ -17,22 +17,22 @@
         </div>
         <div class="date" id="lastModified"></div> 
         <div class="content">  <!-- 文章内容 --><p>
-
-            <h2>视频教程</h2>https://www.youtube.com/embed/uKXVXaa5_YI</div><p>OpenBullet1使用教程：<a href="https://bulianglin.com/archives/48.html" target="_blank" >https://bulianglin.com/archives/48.html</a><br>安装xui：<code>bash &lt;(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)</code><br>CF优选IP工具：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL1hJVTIvQ2xvdWRmbGFyZVNwZWVkVGVzdC9yZWxlYXNlcy9sYXRlc3Q" target="_blank" >https://github.com/XIU2/CloudflareSpeedTest/releases/latest</a><br>反代CF的IP：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL2lwLXNjYW5uZXIvY2xvdWRmbGFyZQ" target="_blank" >https://github.com/ip-scanner/cloudflare</a><br>合并txt文件：<code>type *.txt&gt;&gt;all.txt</code></p><p>OpenBullet2：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL29wZW5idWxsZXQvT3BlbkJ1bGxldDIvcmVsZWFzZXMvbGF0ZXN0" target="_blank" >https://github.com/openbullet/OpenBullet2/releases/latest</a><br>CF节点信息：<code>/cdn-cgi/trace</code><br>机场三字码查询：<a href="https://bulianglin.com/g/aHR0cDovL2FpcnBvcnQuYW5zZW8uY24v" target="_blank" >http://airport.anseo.cn/</a><br><strong>loli脚本：</strong> </p>     <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>BLOCK:HttpRequest
-                url = $"http://<input.DATA>/cdn-cgi/trace"
-                maxNumberOfRedirects = 2
-                customHeaders = {("Host", "cf.nicename.tk")}
-                timeoutMilliseconds = 3000
-                TYPE:STANDARD
-                $""
-                "application/x-www-form-urlencoded"
-              ENDBLOCK
+            <h2>  <a href="https://www.youtube.com/embed/uKXVXaa5_YI" target="_blank">视频教程</a></h2>
+            安装xui：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>bash &lt;(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)</code></pre><br>CF优选IP工具：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL1hJVTIvQ2xvdWRmbGFyZVNwZWVkVGVzdC9yZWxlYXNlcy9sYXRlc3Q" target="_blank" >https://github.com/XIU2/CloudflareSpeedTest/releases/latest</a></p>反代CF的IP：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL2lwLXNjYW5uZXIvY2xvdWRmbGFyZQ" target="_blank" >https://github.com/ip-scanner/cloudflare</a><br><p></p>合并txt文件：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>type *.txt&gt;&gt;all.txt</code></pre></p><p>OpenBullet2：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL29wZW5idWxsZXQvT3BlbkJ1bGxldDIvcmVsZWFzZXMvbGF0ZXN0" target="_blank" >https://github.com/openbullet/OpenBullet2/releases/latest</a><p>CF节点信息：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>/cdn-cgi/trace</code></pre>机场三字码查询：<a href="https://bulianglin.com/g/aHR0cDovL2FpcnBvcnQuYW5zZW8uY24v" target="_blank" >http://airport.anseo.cn/</a><br><strong>loli脚本：</strong> </p>     <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>BLOCK:HttpRequest
+  url = $"http://<input.DATA>/cdn-cgi/trace"
+  maxNumberOfRedirects = 2
+  customHeaders = {("Host", "cf.nicename.tk")}
+  timeoutMilliseconds = 3000
+  TYPE:STANDARD
+  $""
+  "application/x-www-form-urlencoded"
+ENDBLOCK
               
-              BLOCK:Keycheck
-                banIfNoMatch = False
-                KEYCHAIN SUCCESS OR
-                  STRINGKEY @data.SOURCE Contains "h=cf.nicename.tk"
-              ENDBLOCK</code></pre>          </div>
+BLOCK:Keycheck
+  banIfNoMatch = False
+  KEYCHAIN SUCCESS OR
+    STRINGKEY @data.SOURCE Contains "h=cf.nicename.tk"
+ENDBLOCK</code></pre>          </div>
  
     
     </div> <!-- 文章内容 -->    
