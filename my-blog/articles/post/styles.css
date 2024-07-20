@@ -5,11 +5,12 @@ body {
     padding: 0; /* 去除页面默认内边距 */
     align-items: center; /* 水平居中 */
     max-width: 800px; /* 设置最大宽度为800px */
-    text-decoration: none; /* 去除文字装饰 */
+    text-decoration: none; /* 去除下划线 */
     padding-left: 10px; /* 左内边距10px */
     padding-right: 10px; /* 右内边距10px */
     margin: 0 auto; /* 将页面水平居中 */
     word-wrap: break-word; /* 自动换行 */
+    font-family: Arial, sans-serif;   
 }
 
 .header { /* 设置header类的样式 */
@@ -24,7 +25,7 @@ body {
 .header a { /* 设置header中的a元素样式 */
     text-decoration: none; /* 去除下划线 */
     margin: 0; /* 去除默认外边距 */
-    font-size: 20px; /* 设置字体大小 */
+
     color: #333; /* 设置文字颜色 */
     justify-content: center; /* 水平居中显示 */
     font-weight: bold; /* 设置字体加粗 */
@@ -40,20 +41,28 @@ pre {
     border-radius: 5px; /* 圆角 */
     white-space: pre-wrap; /* 自动换行 */
     font-family: Arial, sans-serif;
+    max-height: 300px; 
+    overflow-y: auto;  /* 允许垂直滚动 */
 }
 
 
 .content a { /* 设置container类的样式 */
     text-decoration: none; /* 去除下划线 */
-    font-size: 15px; /* 设置字体大小 */
+    
 }
 
-.content { 
-    padding-left: 10px; /* 左内边距 */
-    padding-right: 12px; /* 右内边距 */
-    font-size: 17px; /* 设置字体大小 */
+.content,.content a,h1, h2, h3, h4, h5, h6 { 
+    font-size: 1.1em; /* 设置字体大小 */
     text-decoration: none; /* 去除下划线 */
-    font-family: Arial, sans-serif;   font-family: Arial, sans-serif;
+   
+}
+
+
+.container{ 
+    font-size: 16px; /* 设置字体大小 */
+    padding-left: 12px; /* 左内边距 */
+    padding-right: 12px; /* 右内边距 */
+    text-decoration: none; /* 去除下划线 */
 }
 
 .copy-button {
@@ -73,7 +82,7 @@ pre {
 }
 
 img {
-    max-width: 100%; /* 最大宽度100% */
+    max-width: 98%; /* 最大宽度100% */
     height: auto; /* 自动调整高度 */
     display: block; /* 块级元素显示 */
     margin: 0 auto; /* 居中对齐 */
@@ -137,7 +146,6 @@ footer a {
 }
 
 @media (max-width: 800px) { /* 设置媒体查询，当屏幕宽度小于800px时应用以下样式 */
-    
     .subheader h1 { 
         font-size: 1em; /* 设置字体大小 */
     }  
@@ -145,4 +153,5 @@ footer a {
         font-size: 0.96em; /* 设置字体大小 */
     }  
  
+
 }
