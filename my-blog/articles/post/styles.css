@@ -35,18 +35,19 @@ body {
 }
 
 pre{
+    font-family: 'Courier New', monospace;
+    max-height: 300px; 
     position: relative; /* 相对定位 */
     padding: 8px; /* 内边距 */
-    background-color: #000;
-    color: #fff;
+    background-color: #e0e0e0;
+    color: #444444;
     border-radius: 5px; /* 圆角 */
     overflow-x: auto;  /* 允许垂直滚动 */
-    max-height: 500px; 
     overflow-y: auto;  /* 允许垂直滚动 */
 }
 
 .content,.content a,.content p,h1, h2, h3, h4, h5, h6 { 
-    font-size: 1.1em; /* 设置字体大小 */
+    font-size: 1em; /* 设置字体大小 */
     text-decoration: none; /* 去除下划线 */
  
 }
@@ -55,20 +56,12 @@ pre{
     text-decoration: none; /* 去除下划线 */
 }
 
-
-.container{ 
-    padding-left: 9px; /* 左内边距 */
-    padding-right: 12px; /* 右内边距 */
-    text-decoration: none; /* 去除下划线 */
-    
-}
-
 .copy-button {
     position: absolute; /* 绝对定位 */
-    top: 1px; /* 距离顶部1px */
+    top: 4px; /* 距离顶部1px */
     right: 10px; /* 距离右边10px */
-    padding: 5px; /* 内边距 */
-    background: #007bff; /* 背景颜色 */
+    padding: 4px; /* 内边距 */
+    background: #000000; /* 背景颜色 */
     color: #fff; /* 文字颜色 */
     border: none; /* 无边框 */
     border-radius: 3px; /* 圆角 */
@@ -152,5 +145,9 @@ footer a {
         font-size: 0.99em; /* 设置字体大小 */
     }  
  
-
+    .container{ 
+        padding-left: 7px; /* 左内边距 */
+        padding-right: 12px; /* 右内边距 */
+        text-decoration: none; /* 去除下划线 */
+    }
 }
