@@ -44,7 +44,9 @@ pre{
     border-radius: 5px; /* 圆角 */
     overflow-x: auto;  /* 允许垂直滚动 */
     overflow-y: auto;  /* 允许垂直滚动 */
+
 }
+
 
 .content,.content a,.content p,h1, h2, h3, h4, h5, h6 { 
     font-size: 1em; /* 设置字体大小 */
