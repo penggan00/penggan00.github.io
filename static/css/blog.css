@@ -127,16 +127,11 @@ footer a {
     padding: 6px; /* 设置内边距 */
     justify-content: center; /* 水平居中显示 */
     align-items: center; /* 垂直居中显示 */
-}
-
-/* 设置按钮的样式，左右边距为 2px，内边距为 5px 10px，光标样式为指针 */
-button {
     margin: 0 2px; /* 左右边距2px */
     padding: 5px 10px; /* 设置内边距 */
     cursor: pointer; /* 设置光标样式 */
     margin-top: 13px; /* 上边距13px */
-    position: relative; /* 相对定位 */
-    left: 10px; /* 左移10px */
+    
 }
 
 /* 设置分页输入框的样式 */
@@ -145,8 +140,12 @@ button {
     height: 25px; /* 设置输入框高度 */
     text-align: center; /* 文字居中 */
     margin-left: 3px; /* 左边距3px */
+}
+
+.pagination {  
     position: relative; /* 相对定位 */
-    left: 10px; /* 左移10px */
+    left: 15px; /* 左移10px */
+
 }
 
 /* 在小屏幕下的响应式布局 */
@@ -170,6 +169,6 @@ button {
 
     .pagination input[type="number"] {
         width: 25px; /* 设置输入框宽度 */
-        text-align: center; /* 文字居中 */
+       
     }
 }
