@@ -29,6 +29,33 @@ a {
     text-decoration: none;
   }
 
+  pre{
+    font-family: 'Courier New', monospace;
+    max-height: 600px; 
+    position: relative; /* 相对定位 */
+    padding: 8px; /* 内边距 */
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 5px; /* 圆角 */
+    overflow-x: auto;  /* 允许垂直滚动 */
+    overflow-y: auto;  /* 允许垂直滚动 */
+
+}
+.copy-button {
+    position: absolute; /* 绝对定位 */
+    top: 4px; /* 距离顶部1px */
+    right: 10px; /* 距离右边10px */
+    padding: 4px; /* 内边距 */
+    background: #007bff; /* 背景颜色 */
+    color: #fff; /* 文字颜色 */
+    border: none; /* 无边框 */
+    border-radius: 3px; /* 圆角 */
+    cursor: pointer; /* 鼠标悬停样式 */
+}
+
+.copy-button:hover {
+    background: #0056b3; /* 悬停背景颜色 */
+}
 .links {
     display: flex; /* 以弹性布局 */
     flex-wrap: wrap; /* 可换行 */

@@ -120,6 +120,7 @@ footer a {
 .pagination button.active {
     background-color: #000; /* 设置背景色 */
     color: #ffffff; /* 设置文字颜色 */
+    
 }
 
 /* 设置分页容器的样式，使用 Flex 布局，水平居中显示，垂直居中显示 */
@@ -131,7 +132,8 @@ footer a {
     padding: 5px 10px; /* 设置内边距 */
     cursor: pointer; /* 设置光标样式 */
     margin-top: 13px; /* 上边距13px */
-    
+    position: relative; /* 相对定位 */
+    left: 15px; /* 左移10px */
 }
 
 /* 设置分页输入框的样式 */
@@ -140,9 +142,11 @@ footer a {
     height: 25px; /* 设置输入框高度 */
     text-align: center; /* 文字居中 */
     margin-left: 3px; /* 左边距3px */
+    position: relative; /* 相对定位 */
+    left: 15px; /* 左移10px */
 }
 
-.pagination {  
+.pagination span {  
     position: relative; /* 相对定位 */
     left: 15px; /* 左移10px */
 
