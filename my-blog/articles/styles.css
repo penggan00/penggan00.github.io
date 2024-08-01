@@ -36,7 +36,7 @@ body {
 
 pre{
     font-family: 'Courier New', monospace;
-    max-height: 600px; 
+    max-height: 100px; 
     position: relative; /* 相对定位 */
     padding: 8px; /* 内边距 */
     background-color: #000000;
