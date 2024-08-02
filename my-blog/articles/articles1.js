@@ -20,7 +20,7 @@ const articles1 = [
     { title: "办公-NAS All in one", link: "articles/post/19.html", lastModified: "2024-06-17 09:11:00" },
     { title: "电脑开机密码", link: "articles/post/20.html", lastModified: "2024-06-18 09:11:00" },
     { title: "905游戏盒子 工具", link: "articles/post/21.html", lastModified: "2024-06-18 10:11:00" },
-    { title: "905游戏盒子 dtb", link: "articles/post/22.html", lastModified: "2024-06-18 11:11:00" },
+    { title: "EmuELEC905-dtb", link: "articles/post/22.html", lastModified: "2024-06-18 11:11:00" },
     { title: "开心电视助手6.2", link: "articles/post/23.html", lastModified: "2024-06-19 11:11:00" },
     { title: "最好用的视频播放软件", link: "articles/post/24.html", lastModified: "2024-06-20 11:11:00" },
     { title: "clouflare开源图床", link: "articles/post/25.html", lastModified: "2024-06-20 12:11:00" },

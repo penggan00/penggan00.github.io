@@ -33,7 +33,7 @@ body {
 
 pre {
     font-family: 'Courier New', monospace;
-    max-height: 100px;
+    max-height: px;
     position: relative;
     padding: 8px;
     background-color: #000;
@@ -143,5 +143,8 @@ footer a {
         padding-left: 7px;
         padding-right: 12px;
         text-decoration: none;
+    }
+    pre {
+        max-height: 65px;
     }
 }
