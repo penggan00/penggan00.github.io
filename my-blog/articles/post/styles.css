@@ -67,6 +67,10 @@ pre {
     background: #0056b3;
 }
 
+a
+{  text-decoration: none;
+}
+
 img {
     max-width: 100%;
     height: auto;

@@ -136,13 +136,11 @@ footer {
     align-items: center; /* 垂直居中 */
     background-color: #f7f7f7; /* 背景颜色为浅灰色 */
     padding: 15px; /* 内边距 */
-   
-   
 }
 
 footer a {    
     text-decoration: none; /* 去除下划线 */
     color: #333; /* 设置文字颜色 */
-    width: 36px; /* 设置输入框宽度 */
-    
+    width: 45px; /* 设置输入框宽度 */
+    font-size: 25px; /* 字体大小 20 像素 */
 }

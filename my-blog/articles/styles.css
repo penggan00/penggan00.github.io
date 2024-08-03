@@ -67,6 +67,10 @@ pre {
     background: #0056b3;
 }
 
+a
+{  text-decoration: none;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -145,6 +149,6 @@ footer a {
         text-decoration: none;
     }
     pre {
-        max-height: 100px;
+        max-height: 65px;
     }
 }
