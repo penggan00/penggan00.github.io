@@ -134,7 +134,7 @@ footer a {
     left: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
     .subheader h1 {
         font-size: 0.98em;
     }
