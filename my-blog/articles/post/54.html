@@ -20,7 +20,7 @@
 
 
     <p>说起网络代理工具大家第一时间想到的应该是v2ray和clash，最近又有另一个非常火的网络代理工具出现了，sing-box，和v2ray属于同一种类型的工具，但是sing-box对协议支持的丰富程度可以说无人能及，本期教程就来带大家简单上手sing-box，使用sing-box搭建一个非常骚的shadowtls节点</p><h2>视频教程</h2>  <a href="https://www.youtube.com/embed/o-IFEu4GENE" target="_blank">https://www.youtube.com/embed/o-IFEu4GENE</a></div><hr><h2>安装sing-box</h2>
-    官方文档：<a href="https://sing-box.sagernet.org" target="_blank" >https://sing-box.sagernet.org</a><br>下载sing-box：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>wget https://github.com/SagerNet/sing-box/releases/download/v1.0.4/sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>最新版请在项目官方地址获取：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL1NhZ2VyTmV0L3NpbmctYm94L3JlbGVhc2VzL2xhdGVzdA" target="_blank" >https://github.com/SagerNet/sing-box/releases/latest</a></p></blockquote><p>安装sing-box：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>dpkg -i sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>查看安装包内容：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>dpkg -c sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>修改配置文件：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>vim /etc/sing-box/config.json</code></pre></p><p>查看sing-box状态：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>systemctl status sing-box.service</code></pre></p><p>启动sing-box：<code>systemctl start sing-box.service</code></pre></p><h2>sing-box服务端shadowtls配置</h2><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
+    官方文档：<a href="https://sing-box.sagernet.org" target="_blank" >https://sing-box.sagernet.org</a><br>下载sing-box：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>wget https://github.com/SagerNet/sing-box/releases/download/v1.0.4/sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>最新版请在项目官方地址获取：<a href="https://bulianglin.com/g/aHR0cHM6Ly9naXRodWIuY29tL1NhZ2VyTmV0L3NpbmctYm94L3JlbGVhc2VzL2xhdGVzdA" target="_blank" >https://github.com/SagerNet/sing-box/releases/latest</a></p></blockquote><p>安装sing-box：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>dpkg -i sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>查看安装包内容：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>dpkg -c sing-box_1.0.4_linux_amd64.deb</code></pre></p><p>修改配置文件：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>vim /etc/sing-box/config.json</code></pre></p><p>查看sing-box状态：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>systemctl status sing-box.service</code></pre></p><p>启动sing-box：<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>systemctl start sing-box.service</code></pre></p>sing-box服务端shadowtls配置<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
 &quot;inbounds&quot;: [
 {
 &quot;type&quot;: &quot;shadowtls&quot;,
@@ -39,7 +39,7 @@
 &quot;password&quot;: &quot;8JCsPssfgS8tiRwiMlhARg==&quot;
 }
 ]
-}</code></pre><h2>sing-box客户端shadowtls配置</h2><h3>socks/http代理模式</h3><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
+}</code></pre>sing-box客户端shadowtls配置socks/http代理模式<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
 &quot;inbounds&quot;: [
 {
 &quot;type&quot;: &quot;mixed&quot;,
@@ -93,7 +93,7 @@
 ]
 }
 }
-</code></pre><h3>TUN模式</h3><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
+</code></pre>TUN模式<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>{
 &quot;dns&quot;: {
 &quot;servers&quot;: [
 {
