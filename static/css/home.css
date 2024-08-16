@@ -38,7 +38,7 @@ a {
         
 
         .item {
-            width: 20%; /* 每个标签占23%的宽度 */
+            width: 25%; /* 每个标签占23%的宽度 */
             text-align: center;
             box-sizing: border-box; /* 包括padding和border在width和height之内 */
             
@@ -57,7 +57,7 @@ a {
             color: black;
             font-size: 16px;
             display: block;
-            margin-top: 5px;
+          
         }
 
         .item a:hover {
