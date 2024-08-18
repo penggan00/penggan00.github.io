@@ -189,7 +189,17 @@ footer {
     text-decoration: none; /* 去除下划线 */
 }
 
-footer a {    
+footer a,footerr a {    
     color: #333; /* 设置文字颜色 */
     width: 45px; /* 设置输入框宽度 */
+}
+
+footerr{ 
+    width: 100%;
+    display: flex; /* 弹性盒布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    background-color: #f7f7f7; /* 背景颜色为浅灰色 */
+    text-decoration: none; /* 去除下划线 */
+   
 }
