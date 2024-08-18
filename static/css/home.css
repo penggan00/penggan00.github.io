@@ -47,7 +47,7 @@ a {
             width: 25%; /* 每个标签占23%的宽度 */
             text-align: center;
             box-sizing: border-box; /* 包括padding和border在width和height之内 */
-            
+    
         }
 
         .item img,.itemm img {
@@ -201,5 +201,5 @@ footerr{
     align-items: center; /* 垂直居中 */
     background-color: #f7f7f7; /* 背景颜色为浅灰色 */
     text-decoration: none; /* 去除下划线 */
-   
+    padding: 0 15px;
 }
