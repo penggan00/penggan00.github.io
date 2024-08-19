@@ -197,16 +197,16 @@ footer a,section a {
 }
 
 section{ 
-    width: 100%;
     display: flex; /* 弹性盒布局 */
     justify-content: center; /* 水平居中 */
     align-items: center; /* 垂直居中 */
     background-color: #f7f7f7; /* 背景颜色为浅灰色 */
+    padding: 15px; /* 内边距 */
+    margin-bottom: -2px;
     text-decoration: none; /* 去除下划线 */
-    padding: 0 15px;
 }
 @media (max-width: 800px) { /* 设置媒体查询，当屏幕宽度小于800px时应用以下样式 */
     section{ 
-    margin-left: -12px;
+    margin-left: 4px;
 }
 }
