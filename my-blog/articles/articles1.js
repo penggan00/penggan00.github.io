@@ -24,7 +24,7 @@ const articles1 = [
     { title: "开心电视助手6.2", link: "articles/post/23.html", lastModified: "2024-06-19 11:11:00" },
     { title: "最好用的视频播放软件", link: "articles/post/24.html", lastModified: "2024-06-20 11:11:00" },
     { title: "clouflare开源图床", link: "articles/post/25.html", lastModified: "2024-06-20 12:11:00" },
-    { title: "安卓最好的音乐播放器", link: "articles/post/26.html", lastModified: "2024-06-21 12:11:00" },
+    { title: "html-代码压缩", link: "articles/post/26.html", lastModified: "2024-06-21 12:11:00" },
     { title: "Emuelec菜单汉化s905", link: "articles/post/27.html", lastModified: "2024-06-22 12:11:00" },
     { title: "Emuelec4.6 s905x2x3X4-s922", link: "articles/post/28.html", lastModified: "2024-06-23 12:11:00" },
     { title: "s905小容量TF卡刷入大镜像", link: "articles/post/29.html", lastModified: "2024-06-23 16:21:00" },

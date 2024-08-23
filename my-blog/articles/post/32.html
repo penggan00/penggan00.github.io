@@ -1,39 +1,5 @@
-<!DOCTYPE html> <!-- 声明文档类型 -->
-<html lang="en"> <!-- 设置文档语言为英语 -->
-<head>
-    <meta charset="UTF-8"> <!-- 设置文档字符编码为UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，以确保页面在移动设备上正确显示 -->
-    <title>peng gan Bolg</title>  <!-- 设置页面标题 -->
-    <link rel="stylesheet" href="styles.css"> <!-- 引入外部CSS文件 -->
-</head>
-<body>
-<div class="header"> <!-- 定义一个类为header的div -->
-            <a href="../../index.html">My Blog</a> <!-- 链接内容 -->
-        </div>
-    <div class="container"> <!-- 定义一个类为container的div -->
-        
-        <div class="subheader"> <!-- 定义一个类为subheader的div -->
-            <h1>      10年免费主机部署vless节点</h1> <!-- 文章主题 -->
-      </div>
-        <div class="date" id="lastModified"></div> <!-- 定义一个类为date的div，显示创建时的日期与时间 -->
-        <div class="content"> <!-- 定义一个类为content的div -->
-            <!-- 文章内容 -->
-
-        
-
-<h2>Serv00 是一家提供免费虚拟主机的厂商。它的免费套餐包含:</h2>
-<a>3GB 存储空间
-<a>512MB 内存
-<a>不限流量
-<a>支持PHP、MySQL等网站开发语言和数据库
-<a>提供免费的二级域名
-<a>可自定义开放端口
-<a>支持SSH访问
-<p>要求是每3个月需登录一次控制面板或SSH,避免账号被回收</p>
-
-<p>访问官网: <a href="https://www.serv00.com/" target="_blank" rel="noopener">https://www.serv00.com/</a>
-
-</p>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>peng gan Bolg</title><link href=styles.css rel=stylesheet><div class=header><a href=../../index.html>My Blog</a></div><div class=container><div class=subheader><h1>10年免费主机部署vless节点</h1></div><div class=date id=lastModified></div><div class=content>
+    <h2>Serv00 是一家提供免费虚拟主机的厂商。它的免费套餐包含:</h2><a>3GB 存储空间 <a>512MB 内存 <a>不限流量 <a>支持PHP、MySQL等网站开发语言和数据库 <a>提供免费的二级域名 <a>可自定义开放端口 <a>支持SSH访问<p>要求是每3个月需登录一次控制面板或SSH,避免账号被回收<p>访问官网: <a href=https://www.serv00.com/ rel=noopener target=_blank>https://www.serv00.com/</a></p>
 
 
 <h2>点击「Register an account」进入注册页面,注册之前需要注意三点</h2>
@@ -83,9 +49,9 @@
 <p>进入项目操作目录,以下命令行中&lt;Your-domain&gt;换成你的域名</p>
 <div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>cd ~/domains/&lt;Your-domain&gt;
 </code></pre></div><p>克隆serv00-vless项目到</p>
-<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>git clone https://github.com/qwer-search/serv00-vless <span style="colo">&amp;&amp;</span> mv -f serv00-vless vless <span style="color:">&amp;&amp;</span> cd vless <span style="color:">&amp;&amp;</span> rm -f README.md
+<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>git clone https://github.com/qwer-search/serv00-vless &amp;&amp;</span> mv -f serv00-vless vless >&amp;&amp;</span> cd vless >&amp;&amp;</span> rm -f README.md
 </code></pre></div><p>在serv00的管理页面上开启一个端口，Port reservation -&gt; Add port添加一个TCP的端口号。再在File Manager 里面找到Vless的文件下的app.js文件，修改里面的端口号为刚刚添加的端口号。类似下面修改为了12345</p>
-<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>const port <span style="color:">=</span> process.env.PORT <span style="color:2">||</span> 12345;
+<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>const port >=</span> process.env.PORT <span style="color:2">||</span> 12345;
 </code></pre></div><p>安装依赖</p>
 <div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>npm install
 </code></pre></div><p>安装完毕后，使用PM2启动并守护vless进程：</p>
@@ -126,7 +92,7 @@
 </tbody>
 </table>
 <p>也可以复制以下vless节点信息，修改&lt;域名地址&gt;为Panel 中 WWW Websites 选项卡里的你的 Domain name，&lt;端口&gt;为你放行的端口即可</p>
-<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>vless://37a0bd7c-8b9f-4693-8916-bd1e2da0a817@&lt;域名地址&gt;:&lt;端口&gt;?flow<span style="color:">=</span>&amp;security<span style="color:">=</span>none&amp;encryption<span style="color:">=</span>none&amp;type<span style="color:">=</span>ws&amp;host<span style="color:">=</span>&lt;域名地址&gt;&amp;path<span style="color:">=</span>/&amp;sni<span style="color:">=</span>&amp;fp<span style="color:">=</span>&amp;pbk<span style="color:">=</span>&amp;sid<span style="color:">=</span><span style="color:#75715e">#%E4%B8%80%E4%BC%91vless%EF%BC%8CTG%E7%BE%A4%EF%BC%9Ahttps://t.me/yxjsjl</span>
+<div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>vless://37a0bd7c-8b9f-4693-8916-bd1e2da0a817@&lt;域名地址&gt;:&lt;端口&gt;?flow>=</span>&amp;security>=</span>none&amp;encryption>=</span>none&amp;type>=</span>ws&amp;host>=</span>&lt;域名地址&gt;&amp;path>=</span>/&amp;sni>=</span>&amp;fp>=</span>&amp;pbk>=</span>&amp;sid>=</span><span style="color:#75715e">#%E4%B8%80%E4%BC%91vless%EF%BC%8CTG%E7%BE%A4%EF%BC%9Ahttps://t.me/yxjsjl</span>
 </code></pre></div><p>上表没有给出的可以不填。</p>
 <p>我用的客户端是v2rayU，按照这个配置就行。目前测试下来连接不是很稳定，延迟忽高忽低，有300ms左右。</p>
 <p><a href="https://scamalytics.com/" target="_blank" rel="noopener">纯净度检测</a></p>
@@ -156,17 +122,4 @@ EOF</span>
 </code></pre></div><p>添加完之后，在SSH窗口保存PM2的当前任务列表快照：</p>
 <div class="highlight"><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>~/.npm-global/bin/pm2 save
 </code></pre></div><p>这样每次serv00不定时重启任务时，都能自动调用PM2读取保存的任务列表快照，恢复任务列表。如果在保存了任务列表快照后又改变了任务PM2的任务列表，需要重新执行pm2 save以更新任务列表。</p>
-
-
-        </div>
-     
-            
- <!-- 文章内容 -->
-        </div>
-    </div>
-    <script src="script.js"></script> <!-- 引用外部JavaScript文件 -->
-    <footer>
-        <a href="https://t.me/g9999_bot/" target="_blank">&copy; 2024 peng gan. All rights reserved.</a>    
-                </footer>
-</body>
-</html>
+<script src=script.js></script><footer><a href=https://t.me/g9999_bot/ target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
