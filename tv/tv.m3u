@@ -120,7 +120,7 @@ http://39.134.115.163:8080/PLTV/88888910/224/3221225672/index.m3u8
 #EXTINF:-1 tvg-name="黑莓电影" tvg-logo="https://penggan0.us.kg/tv/tv/黑莓电影.png" group-title="数字频道",黑莓电影
 http://39.134.115.163:8080/PLTV/88888910/224/3221225769/index.m3u8
 http://39.134.115.163:8080/PLTV/88888910/224/3221225764/index.m3u8
-#EXTINF:-1 tvg-name="newtv炫舞未来" tvg-logo="https://penggan0.us.kg/tv/tv/NewTV炫舞未来.png" group-title="数字频道",炫舞未来
+#EXTINF:-1 tvg-name="newtv炫舞未来" tvg-logo="https://penggan0.us.kg/tv/tv/NEWTV炫舞未来.png" group-title="数字频道",炫舞未来
 http://39.134.115.163:8080/PLTV/88888910/224/3221225707/index.m3u8
 #EXTINF:-1 tvg-name="newtv精品体育" tvg-logo="https://penggan0.us.kg/tv/tv/NEWTV精品体育.png" group-title="数字频道",精品体育
 http://39.134.115.163:8080/PLTV/88888910/224/3221226243/index.m3u8
