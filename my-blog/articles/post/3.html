@@ -1,2 +1,143 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>peng gan Blog</title><link href=styles.css rel=stylesheet><div class=header><a href=../../index.html>My Blog</a></div><div class=container><div class=subheader><h1>V2Ray一键安装脚本</h1></div><div class=date id=lastModified></div><div class=content><h4>shadowsocks -Windows 客户端下载</h4><p><img src=https://img.penggan.us.kg/file/f418de72a51538f2407ca.png><p>V2Ray的搭建，首先需要你拥有一台国外VPS服务器，如果还没有，可以参考以下链接文章购买：<p><a href=https://ssr.tools/55 target=_blank rel="noopener noreferrer">适合搭建SSR的国外VPS服务器推荐汇总</a><p>VPS服务器购买成功后，我们就可以进行V2Ray的安装了。其实安装过程并不复杂，倒是安装之后的设置过程需要花点功夫，毕竟需要修改一些代码参数。<p>不过不用担心，本文介绍的雨落无声的V2Ray一键安装，安装完成后自带图形化控制面板，简单设置之后就可以使用了，对新手用户非常友好。<p> <p><strong>提示：</strong><p>该一键脚本在少部分系统下，如果出现安装失败，或者无法正常使用的情况。可以尝试另外一个V2ray脚本：<p><a href=https://ssr.tools/1026 target=_blank rel="noopener noreferrer">233版V2ray一键安装脚本 集成BBR/锐速/Shadowsocks</a><p> <h3>V2Ray一键安装 环境</h3><p><strong>时间要求：</strong><p>V2Ray的连接对时间准确度要求较高，服务器端与客户端时间误差不能超过2分钟。<p>一般来说，服务器的时间是比较准确的，只要服务器的时间与所在时区时间一致，V2ray会自适应时差。我们只要保证本地V2Ray客户端设备的分钟数，与服务器的分钟数保持一致即可。简单方法：<p><a href=https://ssr.tools/72 target=_blank rel="noopener noreferrer">Putty</a>连接VPS服务器，输入date回车，会返回服务器时间。然后调整客户端设备的分钟数，两者保持一致<p><strong>服务器系统要求：</strong><ul><li>Debian 8<li>Debian 9<li>Ubuntu 14<li>Ubuntu 16<li>CentOS 7 （不支持CentOS 6）</ul><p>以上各系统中，如果是新手朋友，不推荐使用CentOS，因为可能需要额外开放防火墙相关端口。而Debian和Ubuntu一般无需设置防火墙。<p> <p>V2Ray一键安装脚本<p>1.用<a href=https://ssr.tools/72 target=_blank rel="noopener noreferrer">Putty</a>连接VPS服务器，复制以下命令输入开始安装：<pre><button class=copy-button onclick=copyToClipboard(this)>复制</button><code>wget –N —no–check–certificate https://raw.githubusercontent.com/FunctionClub/V2ray.Fun/master/install.sh && bash install.sh
-</code></pre></div><p>如果运行以上命令时，出现找不到wget的英文提示，则表示系统没有安装wget，根据系统不同，选择以下命令安装：<div class="crayon-font-monaco crayon-os-pc crayon-syntax crayon-theme-capacitacionti notranslate print-yes"id=crayon-5e93caa55a78c710257335 data-settings=" minimize scroll-always disable-anim"><div class=crayon-plain-wrap></div><div class=crayon-main><table class=crayon-table><tr class=crayon-row><td class=crayon-nums data-settings=show><div class=crayon-nums-content><div class=crayon-num data-line=crayon-5e93caa55a78c710257335-1>1</div><div class=crayon-num data-line=crayon-5e93caa55a78c710257335-2>2</div><div class=crayon-num data-line=crayon-5e93caa55a78c710257335-3>3</div><div class=crayon-num data-line=crayon-5e93caa55a78c710257335-4>4</div></div><td class=crayon-code><div class=crayon-pre><div class=crayon-line id=crayon-5e93caa55a78c710257335-1><span class=crayon-i>CentOS</span>：</div><div class=crayon-line id=crayon-5e93caa55a78c710257335-2><span class=crayon-v>yum</span> <span class=crayon-o>–</span><span class=crayon-i>y</span> <span class=crayon-e>install </span><span class=crayon-e>wget</span></div><div class=crayon-line id=crayon-5e93caa55a78c710257335-3><span class=crayon-v>Ubuntu</span><span class=crayon-o>/</span><span class=crayon-i>Debian</span>：</div><div class=crayon-line id=crayon-5e93caa55a78c710257335-4><span class=crayon-v>apt</span><span class=crayon-o>–</span><span class=crayon-v>get</span> <span class=crayon-o>–</span><span class=crayon-i>y</span> <span class=crayon-e>install </span><span class=crayon-v>wget</span></div></div></table></div></div><p> <p>2.V2Ray安装接近完成时，会提示输入用户名、密码、控制面板端口，可随意设置，如下图：<p>访问控制面板需要用这个端口，用户名和密码用于登录控制面板。<p> <p><img src=https://img.penggan.us.kg/file/2be480568a395364e4996.jpg><p>3.正常来说，V2Ray已经安装成功了，可以尝试在浏览器打开控制面板地址。不过站长在这一步后无法打开V2Ray控制面板，可能是个例，保险起见，再复制以下命令运行：<div class="crayon-font-monaco crayon-os-pc crayon-syntax crayon-theme-capacitacionti notranslate print-yes"id=crayon-5e93caa55a78e920004722 data-settings=" minimize scroll-always disable-anim"><div class=crayon-plain-wrap></div><div class=crayon-main><table class=crayon-table><tr class=crayon-row><td class=crayon-nums data-settings=show><div class=crayon-nums-content><div class=crayon-num data-line=crayon-5e93caa55a78e920004722-1>1</div></div><td class=crayon-code><div class=crayon-pre><div class=crayon-line id=crayon-5e93caa55a78e920004722-1><span class=crayon-e>pip </span><span class=crayon-e>install </span><span class=crayon-v>Flask</span><span class=crayon-o>–</span><span class=crayon-v>BasicAuth</span></div></div></table></div></div><p> <p>4.以上命令运行完成后，我们再启动面板。Putty输入以下命令，然后选择1回车。如下图，提示V2ray.fun started，即表示启动成功。<div class="crayon-font-monaco crayon-os-pc crayon-syntax crayon-theme-capacitacionti notranslate print-yes"id=crayon-5e93caa55a78f918271200 data-settings=" minimize scroll-always disable-anim"><div class=crayon-plain-wrap></div><div class=crayon-main><table class=crayon-table><tr class=crayon-row><td class=crayon-nums data-settings=show><div class=crayon-nums-content><div class=crayon-num data-line=crayon-5e93caa55a78f918271200-1>1</div></div><td class=crayon-code><div class=crayon-pre><div class=crayon-line id=crayon-5e93caa55a78f918271200-1><span class=crayon-v>v2ray</span></div></div></table></div></div><p> <p><img src=https://img.penggan.us.kg/file/fa4cfe0b8c0533fbc785e.jpg><p>5.浏览器输入服务器IP+刚才设置的端口，访问V2Ray控制面板，输入用户名和密码登录，登录成功后的界面如下图所示：<p>各项连接参数都显示在运行状态菜单。最下面的Vmess链接和二维码图片，都可以用于客户端连接。<p><img src=https://img.penggan.us.kg/file/b8f97b7441e6f507d88fe.jpg><p> <h3>V2Ray控制面板设置</h3><p>V2Ray.fun控制面板的修改连接菜单中，我们可以修改各项连接参数，如下图所示<ul><li>运行控制：用于控制V2Ray的状态。<li>UUID：用于客户端连接使用，默认是自动生成的，可以点击右侧按钮生成一个新的。<li>主端口：用于客户端连接的端口，可设置一个新的端口，然后点击右侧的修改端口进行修改。<li>加密方式：用于客户端连接的参数，不懂的话，默认即可。<li>传输方式：也是客户端连接参数之一，默认即可。<li>TLS：不建议开启，默认是关闭的，右侧两个按钮是操作按钮，并非表示当前状态。<li>Mux cool：多路复用功能，可提高并发连接性能，默认开启。</ul><p> <p><img src=https://img.penggan.us.kg/file/bd8f801a0a0320353fa62.jpg><p>以上各项参数设置完成后，就可以通过V2Ray客户端连接了。点击上图左侧的运行状态菜单，用V2Ray客户端扫描二维码即可连接，或者输入Vmess链接也可以。<p>V2Ray各客户端下载、安装及使用教程可参考：<p><a href=https://ssr.tools/314 target=_blank rel="noopener noreferrer">V2Ray各平台客户端下载汇总 带图形化界面！</a><p> <h3>V2Ray控制面板打不开解决办法</h3><p>V2Ray.fun控制面板比较直观好用，但是部分情况下，会出现安装完成后，打不开控制面板的情况。其实前文已经提到过解决办法，这里再重复一次，方便单独出现此问题的朋友：<p>Putty连接VPS服务器，分别输入以下命令运行：<div class="crayon-font-monaco crayon-os-pc crayon-syntax crayon-theme-capacitacionti notranslate print-yes"id=crayon-5e93caa55a791756050185 data-settings=" minimize scroll-always disable-anim"><div class=crayon-plain-wrap></div><div class=crayon-main><table class=crayon-table><tr class=crayon-row><td class=crayon-nums data-settings=show><div class=crayon-nums-content><div class=crayon-num data-line=crayon-5e93caa55a791756050185-1>1<pre><button class=copy-button onclick=copyToClipboard(this)>复制</button><code>pip install Flask–BasicAuth</code></pre></div><div class=crayon-num data-line=crayon-5e93caa55a791756050185-2>2<pre><button class=copy-button onclick=copyToClipboard(this)>复制</button><code>v2ray</code></pre></div><div class=crayon-num data-line=crayon-5e93caa55a791756050185-3>3<pre><button class=copy-button onclick=copyToClipboard(this)>复制</button><code>1</code></pre></div></div></div></div></div><p>博主按此方法成功打开V2ray控制面板，个人经历，仅供参考，不一定适用于所有人。</p><script src=script.js></script><footer><a href=https://t.me/g9999_bot/ target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>peng gan Blog</title><link href=styles.css rel=stylesheet><div class=header><a href=../../index.html>My Blog</a></div><div class=container><div class=subheader><h1>serv00恢复初始</h1></div><div class=date id=lastModified></div><div class=content><p>
+本期主要介绍如何将serv00恢复到刚刚注册时的初始状态, 不管你是搭建了节点还是建立了个人博客网站, 使用本期介绍的方法, 都可以将已经写入了内容或者混乱的serv00重置到刚刚注册时的状态.</p><span></a></span><div><iframe allowfullscreen="" class="BLOG_video_class" height="480" src="https://www.youtube.com/embed/thOBMf7ygTU" width="640" youtube-src-id="thOBMf7ygTU"></iframe></div><br /><p><br /></p><h2>章节</h2><p><span></span></p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>00</span>:<span >00</span> 开场白
+<span>00</span>:<span >20</span> 账号信息
+<span>01</span>:<span >07</span> finalshell调用翻墙软件连接serv00
+<span>02</span>:<span >54</span> 搭建vpn后的文件系统
+<span>03</span>:<span >48</span> 新建账号的文件系统
+<span>04</span>:<span >10</span> 搭建前后文件对比
+<span>09</span>:<span >18</span> 恢复如初要做<span >3</span>件事
+<span>09</span>:<span >58</span> 清除PM2所有进程
+<span>11</span>:<span >35</span> 清除系统进程
+<span>15</span>:<span >38</span> 批量删除文件
+<span>16</span>:<span >16</span> 更改文件夹权限
+<span>19</span>:<span >56</span> 删除文件夹及文件
+<span>21</span>:<span >54</span> 补建文件夹(非必须)
+<span>24</span>:<span >08</span> 补充主页文件夹(必须)
+<span>25</span>:<span >30</span> 结语</code></pre></section><p ><span>相关视频:</span></p><p ><span>serv00 注册账号及搭建vpn</span></p><p ><span><a href="https://youtu.be/295wid5YbWI">https://youtu.be/295wid5YbWI</a></span></p><p ><span>serv00 答粉丝问 第1辑</span></p><p ><span><a href="https://youtu.be/-p6Cy_j-mXI">https://youtu.be/-p6Cy_j-mXI</a></span></p><p><span><br /></span></p><p><span>finalshell 下载链接</span><span ></span></p><p ><span><a href="https://pan.quark.cn/s/24be457c15df">pan.quark.cn/s/24be457c15df</a></span></p><h2>1 清除PM2进程</h2><h4>列出进程清单</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>p<span>m2</span> list
+</code></pre></section><h4>恢复已保存列表的进程</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>~/.npm-<span class="hljs-keyword" >global</span>/<span>bin</span>/pm2 resurrect
+</code></pre></section><h4>停止所有进程</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>pm2 <span class="hljs-keyword" >stop</span> <span>all</span>
+</code></pre></section><h4>删除所有进程</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>pm2 <span class="hljs-keyword" >delete</span> <span class="hljs-literal" >all</span>
+</code></pre></section><h2>2 清除虚拟机进程</h2><h3>2.1 列出当前系统所有进程清单</h3><h4>方法一&nbsp;<span>使用&nbsp;<code>ps aux</code></span>:</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>ps <span>aux</span>
+</code></pre></section><p>"aux"这个选项提供了一个更详细的输出包括每个进程的所有者&#12289;CPU 和内存使用情况&#12289;启动时间等</p><p><code>ps aux</code>&nbsp;命令的组成</p><ul><li><span>ps</span>: 进程状态process status的缩写是一个用于显示系统进程信息的命令</li><li><span>a</span>: 显示所有用户的所有进程包括没有控制终端的进程</li><li><span>u</span>: 以用户为中心的格式显示进程信息包括进程的用户&#12289;CPU 和内存使用情况</li><li><span>x</span>: 显示没有控制终端的进程</li></ul><h4>方法二&nbsp;<span>使用&nbsp;<code>top</code></span>:</h4><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>top</span>
+</code></pre></section><p>这个命令提供了一个动态&#12289;实时的系统监视器显示当前所有运行的进程及其资源使用情况 使用&nbsp;<code>q</code>&nbsp;退出&nbsp;<code>top</code></p><h3>2.2 清除指定账户的所有进程</h3><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>pkill -<span>kill</span> -u <span>${username}</span>
+</code></pre></section><p>比如: pkill -kill -u defeisoft</p><h4>解释</h4><ul><li><p><span>pkill</span>: 这个命令用于根据进程名&#12289;用户&#12289;终端或其他属性来选择进程并向它们发送信号</p></li><li><p><span>-kill</span>: 这个选项实际上是一个信号参数<code>-kill</code>&nbsp;等效于&nbsp;<code>-SIGKILL</code>表示发送&nbsp;<code>SIGKILL</code>&nbsp;信号给目标进程<code>SIGKILL</code>&nbsp;信号是一个非捕获&#12289;非忽略的信号用于强制终止进程</p></li><li><p><span>-u ${username}</span>: 这个选项用于根据用户名称来选择进程<code>${username}</code>&nbsp;是一个变量表示你要终止的进程所属的用户名称这个选项会选择所有由指定用户启动的进程</p></li></ul><p><code>pkill -kill -u ${username}</code>&nbsp;这个命令会找到并强制终止所有由指定用户 (<code>${username}</code>) 启动的进程</p><h2>3 删除文件夹及文件夹</h2><h3>3.1 更改非隐藏目录的权限</h3><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>chmod</span> -R <span >755</span> ~/*&nbsp;
+</code></pre></section><h4>解释</h4><ul><li><p><span>chmod</span>: 这个命令用于更改文件或目录的权限</p></li><li><p><span>-R</span>: 这个选项表示递归recursive它会递归地更改指定目录及其子目录中的所有文件和目录的权限</p></li><li><p><span>755</span>: 这是一个权限设置表示所有者owner有读取&#12289;写入和执行权限组group和其他人others有读取和执行权限但没有写入权限具体解释如下</p><ul><li><code>7</code>&nbsp;表示所有者权限rwx读 (4) + 写 (2) + 执行 (1) = 7</li><li><code>5</code>&nbsp;表示组权限r-x读 (4) + 执行 (1) = 5</li><li><code>5</code>&nbsp;表示其他人权限r-x读 (4) + 执行 (1) = 5</li></ul></li><li><p><span>~/</span>: 这个符号表示当前用户的主目录</p></li><li><p><span>*</span>: 这个符号表示主目录中的所有文件和目录</p></li></ul><p>综上<code>chmod -R 755 ~/*</code>&nbsp;命令将递归地更改当前用户主目录中的所有文件和目录的权限使得所有者有读&#12289;写和执行权限组和其他人有读和执行权限但没有写入权限</p><h4>例子</h4><p>假设你当前用户的主目录中有以下文件和目录结构</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>/home/username/
+&#9500;&#9472;&#9472; file1<span>.txt</span>
+&#9500;&#9472;&#9472; file2<span>.txt</span>
+&#9492;&#9472;&#9472; dir1
+    &#9500;&#9472;&#9472; file3<span>.txt</span>
+    &#9492;&#9472;&#9472; dir2
+        &#9492;&#9472;&#9472; file4.txt
+</code></pre></section><p>运行&nbsp;<code>chmod -R 755 ~/*</code>&nbsp;后所有这些文件和目录的权限将变为</p><ul><li><code>/home/username/file1.txt</code>&nbsp;和&nbsp;<code>/home/username/file2.txt</code>&nbsp;权限为&nbsp;<code>755</code></li><li><code>/home/username/dir1</code>&nbsp;及其子目录&nbsp;<code>dir2</code>&nbsp;和其中的文件&nbsp;<code>file3.txt</code>&nbsp;和&nbsp;<code>file4.txt</code>&nbsp;权限也将递归地变为&nbsp;<code>755</code></li></ul><p>请谨慎使用&nbsp;<code>-R</code>&nbsp;选项因为它会影响到目录及其所有子目录和文件</p><h3>3.2 更改隐藏目录的权限</h3><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>chmod</span> -R 755 ~/.*
+</code></pre></section><h5>解释</h5><ul><li><p><span>chmod</span>: 这个命令用于更改文件或目录的权限</p></li><li><p><span>-R</span>: 这个选项表示递归recursive它会递归地更改指定目录及其子目录中的所有文件和目录的权限</p></li><li><p><span>755</span>: 这是一个权限设置表示所有者owner有读取&#12289;写入和执行权限组group和其他人others有读取和执行权限但没有写入权限具体解释如下</p><ul><li><code>7</code>&nbsp;表示所有者权限rwx读 (4) + 写 (2) + 执行 (1) = 7</li><li><code>5</code>&nbsp;表示组权限r-x读 (4) + 执行 (1) = 5</li><li><code>5</code>&nbsp;表示其他人权限r-x读 (4) + 执行 (1) = 5</li></ul></li><li><p><span>~/</span>: 这个符号表示当前用户的主目录</p></li><li><p><span><code>.*</code>:</span>&nbsp;这个模式表示所有以&nbsp;<code>.</code>&nbsp;开头的文件和目录包括隐藏文件和目录</p></li></ul><h4><span>结果</span></h4><p><code>chmod -R 755 ~/.*</code>&nbsp;会递归地更改当前用户主目录中所有以&nbsp;<code>.</code>&nbsp;开头的文件和目录包括隐藏文件和目录的权限包括像&nbsp;<code>.bashrc</code>&#12289;<code>.profile</code>&#12289;<code>.config</code>&nbsp;等文件和目录以及可能的&nbsp;<code>.</code>&nbsp;和&nbsp;<code>..</code>&nbsp;目录</p><h4><span>示例</span></h4><p>假设你的主目录结构如下</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>/home/username/</span>
+&#9500;&#9472;&#9472; file1.txt
+&#9500;&#9472;&#9472; dir1/
+&#9474;   &#9492;&#9472;&#9472; file2.txt
+&#9492;&#9472;&#9472; <span>.hidden/</span>
+    &#9492;&#9472;&#9472; hiddenfile.txt
+</code></pre></section><p>运行&nbsp;<code>chmod -R 755 ~/.*</code>&nbsp;后以下内容的权限可能会被更改</p><ul><li>隐藏目录和文件如&nbsp;<code>.hidden/</code>&nbsp;和&nbsp;<code>.hidden/hiddenfile.txt</code></li><li>当前目录&nbsp;<code>/home/username</code>&nbsp;及其所有内容包括&nbsp;<code>file1.txt</code>&#12289;<code>dir1/</code>&nbsp;和&nbsp;<code>dir1/file2.txt</code></li><li>父目录&nbsp;<code>/home</code>&nbsp;及其所有内容这可能会对系统造成严重影响</li></ul><h4><span>注意事项</span></h4><p>使用&nbsp;<code>chmod -R 755 ~/.*</code>&nbsp;时要非常小心因为它会更改主目录中的所有隐藏文件和目录的权限并且由于&nbsp;<code>.*</code>&nbsp;包括&nbsp;<code>.</code>&nbsp;和&nbsp;<code>..</code>它还可能递归到主目录的父目录以及根目录这可能会导致系统权限混乱更改根目录的权限是不推荐的因为这可能会影响系统的安全性和功能</p><h4><span>替代方案</span></h4><p>如果你确实需要更改某些特定隐藏文件或目录的权限建议明确指定这些文件或目录而不是使用通配符&nbsp;<code>.*</code></p><p>例如</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>chmod</span> -R 755 ~/.config
+</code></pre></section><p>这只会更改&nbsp;<code>.config</code>&nbsp;目录及其子目录和文件的权限而不会影响其他文件或目录</p><h3>3 删除文件夹及文件</h3><h3>3.1 删除非隐藏文件夹及其文件</h3><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>rm</span> -rf ~/*
+</code></pre></section><h4>解释</h4><p><code>rm -rf ~/*</code>&nbsp;命令用于递归地强制删除当前用户主目录中的所有非隐藏文件和目录</p><ul><li><p><span>rm</span>: 这个命令用于删除文件或目录</p></li><li><p><span>-r</span>: 递归recursive选项它会删除指定目录及其所有子目录和文件</p></li><li><p><span>-f</span>: 强制force选项它会强制删除文件或目录而不会提示用户确认</p></li><li><p><span>~/</span>: 表示当前用户的主目录</p></li><li><p><span>*</span>: 通配符表示主目录中的所有非隐藏文件和目录</p></li></ul><h4><span>结果</span></h4><p><code>rm -rf ~/*</code>&nbsp;会递归地强制删除当前用户主目录中所有非隐藏文件和目录这意味着它会删除所有名称不以&nbsp;<code>.</code>&nbsp;开头的文件和目录及其子目录中的所有内容</p><h4><span>示例</span></h4><p>假设你的主目录结构如下</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>/home/username/
+&#9500;&#9472;&#9472; file1<span>.txt</span>
+&#9500;&#9472;&#9472; file2<span>.txt</span>
+&#9492;&#9472;&#9472; dir1/
+    &#9500;&#9472;&#9472; file3<span>.txt</span>
+    &#9492;&#9472;&#9472; dir2/
+        &#9492;&#9472;&#9472; file4.txt
+</code></pre></section><p>运行&nbsp;<code>rm -rf ~/*</code>&nbsp;后以下内容将被删除</p><ul><li><code>/home/username/file1.txt</code></li><li><code>/home/username/file2.txt</code></li><li><code>/home/username/dir1</code>&nbsp;及其所有内容包括&nbsp;<code>dir1/file3.txt</code>&nbsp;和&nbsp;<code>dir1/dir2/file4.txt</code></li></ul><h4><span>注意事项</span></h4><ul><li><span>危险性</span>: 这个命令会删除主目录中的所有非隐藏文件和目录因此在执行该命令之前一定要确认没有需要保留的数据如果误删数据可能无法恢复</li><li><span>不影响隐藏文件和目录</span>: 这个命令不会删除以&nbsp;<code>.</code>&nbsp;开头的隐藏文件和目录隐藏文件和目录会保留在主目录中</li></ul><h3>3.2 删除隐藏文件夹及其文件</h3><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>rm</span> -rf ~/.*&nbsp;
+</code></pre></section><h4>解释</h4><ul><li><p><span>rm</span>: 这是一个用于删除文件或目录的命令</p></li><li><p><span>-r</span>: 这个选项表示递归recursive它会删除指定目录及其子目录和文件</p></li><li><p><span>-f</span>: 这个选项表示强制force它会强制删除文件或目录而不提示用户确认</p></li><li><p><span>~/</span>: 这个符号表示当前用户的主目录</p></li><li><p><code>.*</code>: 这个模式表示所有以&nbsp;<code>.</code>&nbsp;开头的文件和目录包括隐藏文件和目录</p></li></ul><h4>结果</h4><p><code>rm -rf ~/.*</code>&nbsp;会递归地强制删除当前用户主目录中所有以&nbsp;<code>.</code>&nbsp;开头的文件和目录包括隐藏文件和目录</p><h4>示例</h4><p>假设你的主目录结构如下</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>/home/username/</span>
+&#9500;&#9472;&#9472; file1.txt
+&#9500;&#9472;&#9472; dir1/
+&#9474;   &#9492;&#9472;&#9472; file2.txt
+&#9492;&#9472;&#9472; <span>.hidden/</span>
+    &#9492;&#9472;&#9472; hiddenfile.txt
+</code></pre></section><p>运行&nbsp;<code>rm -rf ~/.*</code>&nbsp;后以下内容可能会被删除</p><ul><li>隐藏文件和目录如&nbsp;<code>.hidden/</code>&nbsp;和&nbsp;<code>.hidden/hiddenfile.txt</code></li><li>当前目录&nbsp;<code>/home/username</code>&nbsp;及其所有内容包括&nbsp;<code>file1.txt</code>&#12289;<code>dir1/</code>&nbsp;和&nbsp;<code>dir1/file2.txt</code></li><li>父目录&nbsp;<code>/home</code>&nbsp;及其所有内容这可能会导致系统崩溃</li></ul><h4>注意事项</h4><p>使用&nbsp;<code>rm -rf ~/.*</code>&nbsp;时要非常小心因为它会删除主目录中的所有隐藏文件和目录包括一些重要的配置文件和目录更危险的是由于&nbsp;<code>.*</code>&nbsp;包括&nbsp;<code>.</code>当前目录和&nbsp;<code>..</code>父目录这可能会导致删除主目录及其所有内容甚至删除主目录的父目录及其内容这可能会对系统造成严重破坏</p><h4>替代方案</h4><p>为了避免意外删除重要的文件和目录建议不要直接使用&nbsp;<code>rm -rf ~/.*</code>相反可以明确指定要删除的隐藏文件或目录</p><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>rm</span> -rf ~/.hidden
+<span>rm</span> -f ~/.bashrc
+</code></pre></section><p>这样可以确保只删除特定的隐藏文件或目录而不会影响其他目录和文件</p><h2>4 初始HTML代码</h2><section><pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code><span>&lt;!DOCTYPE&nbsp;<span class="hljs-keyword" >html</span>&gt;</span>  
+<span>&lt;<span>html</span>&gt;</span>  
+&nbsp; &nbsp;&nbsp;<span>&lt;<span>head</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>meta</span>&nbsp;<span>charset</span>=<span>utf-8</span>&nbsp;/&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>title</span>&gt;</span>defei2024.serv00.net - hosted on Serv00.com<span>&lt;/<span>title</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>style</span>&nbsp;<span>type</span>=<span>"text/css"</span>&gt;</span><span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;*&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>margin</span>:&nbsp;<span >0</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>padding</span>:&nbsp;<span >0</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>border</span>:&nbsp;<span >0</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>body</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>background-image</span>:&nbsp;<span>linear-gradient</span>(<span >137deg</span>,&nbsp;<span >#2E457B</span>&nbsp;<span >0%</span>,&nbsp;<span >#237431</span>&nbsp;<span >100%</span>)&nbsp;<span>!important</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>background-attachment</span>:&nbsp;fixed;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>color</span>:&nbsp;<span >#333</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-family</span>:&nbsp;Arial,&nbsp;Verdana,&nbsp;Tahoma;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-size</span>:&nbsp;<span >13px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>#main</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>background</span>:&nbsp;<span >#FFF</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>box-shadow</span>:&nbsp;<span >0</span>&nbsp;<span >0</span>&nbsp;<span >40px</span>&nbsp;<span >#00275A</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>margin-top</span>:&nbsp;<span >65px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>padding-top</span>:&nbsp;<span >20px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>padding-bottom</span>:&nbsp;<span >20px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>width</span>:&nbsp;<span >100%</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>#mainwrapper</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>display</span>:&nbsp;table;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-align</span>:&nbsp;center;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>margin</span>:&nbsp;<span >0</span>&nbsp;auto;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>h1</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>color</span>:&nbsp;<span >#EE6628</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-size</span>:&nbsp;<span >44px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-weight</span>:&nbsp;normal;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-shadow</span>:&nbsp;<span >1px</span>&nbsp;<span >1px</span>&nbsp;<span >2px</span>&nbsp;<span >#A7A7A7</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>h2</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>color</span>:&nbsp;<span >#385792</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-weight</span>:&nbsp;normal;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>font-size</span>:&nbsp;<span >25px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-shadow</span>:&nbsp;<span >1px</span>&nbsp;<span >1px</span>&nbsp;<span >2px</span>&nbsp;<span >#D4D4D4</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>ul</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-align</span>:&nbsp;left;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>margin-top</span>:&nbsp;<span >20px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>p</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>margin-top</span>:&nbsp;<span >20px</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>color</span>:&nbsp;<span >#888</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>a</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>color</span>:&nbsp;<span >#4D73BB</span>;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-decoration</span>:&nbsp;none;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>a</span><span class=>:hover</span>,&nbsp;<span>a</span><span class=>:focus</span>&nbsp;{  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>text-decoration</span>:&nbsp;underline;  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;}  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span>&lt;/<span>style</span>&gt;</span>  
+&nbsp; &nbsp;&nbsp;<span>&lt;/<span>head</span>&gt;</span>  
+&nbsp; &nbsp;&nbsp;  
+&nbsp; &nbsp;&nbsp;<span>&lt;<span>body</span>&gt;</span>  
+  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>div</span>&nbsp;<span>id</span>=<span>"main"</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>div</span>&nbsp;<span>id</span>=<span>"mainwrapper"</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>h1</span>&gt;</span>defei2024.serv00.net<span>&lt;/<span>h1</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>h2</span>&gt;</span>Page successfully added<span>&lt;/<span>h2</span>&gt;</span>  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>ul</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>li</span>&gt;</span>The page is in the directory&nbsp;<span>&lt;<span>b</span>&gt;</span>/usr/home/defei2024/domains/defei2024.serv00.net/public_html<span>&lt;/<span>b</span>&gt;</span><span>&lt;/<span>li</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>li</span>&gt;</span>This file can be deleted (index.html),<span>&lt;/<span>li</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>li</span>&gt;</span>Files can be put on the server using the&nbsp;<span>&lt;<span>b</span>&gt;</span>FTP<span>&lt;/<span>b</span>&gt;</span>,&nbsp;<span>&lt;<span>b</span>&gt;</span>FTPS<span>&lt;/<span>b</span>&gt;</span>&nbsp;or&nbsp;<span>&lt;<span>b</span>&gt;</span>SFTP<span>&lt;/<span>b</span>&gt;</span>&nbsp;protocols.<span>&lt;/<span>li</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;/<span>ul</span>&gt;</span>  
+  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;<span>p</span>&gt;</span>If you have any questions&nbsp;<span>&lt;<span>a</span>&nbsp;<span>href</span>=<span>"https://www.serv00.com/contact"</span>&gt;</span>contact us<span>&lt;/<span>a</span>&gt;</span>.<span>&lt;/<span>p</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;/<span>div</span>&gt;</span>  
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span>&lt;/<span>div</span>&gt;</span>  
+&nbsp; &nbsp;&nbsp;<span>&lt;/<span>body</span>&gt;</span>  
+</div><script src=script.js></script><footer><a href=https://t.me/g9999_bot/ target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
