@@ -33,7 +33,7 @@ const articles1 = [
     { title: "10年免费主机部署", link: "articles/post/32.html", lastModified: "2024-06-25 16:21:00" },
     { title: "tv epg", link: "articles/post/33.html", lastModified: "2024-06-25 19:21:00" },
     { title: "按年份查找GAME", link: "articles/post/34.html", lastModified: "2024-06-29 00:21:00" },
-    { title: "无", link: "articles/post/35.html", lastModified: "2024-06-29 00:31:00" },
+    { title: "wireguard", link: "articles/post/35.html", lastModified: "2024-06-29 00:31:00" },
     { title: "linux命令大全", link: "articles/post/36.html", lastModified: "2024-06-29 00:41:00" },
     { title: "不良林节点搭建教程", link: "articles/post/37.html", lastModified: "2024-07-01 00:41:00" },
     { title: " 京东云AX1800亚瑟", link: "articles/post/38.html", lastModified: "2024-07-10 00:41:00" },
