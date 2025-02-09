@@ -1,0 +1,124 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>peng gan Blog</title><link href=styles.css rel=stylesheet><div class=header><a href=../../index.html>My Blog</a></div><div class=container><div class=subheader><h1>qq.js</h1></div><div class=date id=lastModified></div><div class=content><p>
+
+# root用户······························
+如果你希望用系统服务的方式运行脚本，创建一个 systemd 服务文件。
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo nano /etc/systemd/system/qq.service</code></pre>
+<p># 内容如下：·······································</p>
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>[Unit]
+Description=QQ Script
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/node /root/qq/qq.js
+Restart=always
+User=root
+Environment=PATH=/usr/bin:/usr/local/bin
+WorkingDirectory=/root/qq
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+# 启动服务 ·············································</p>
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code></code>sudo systemctl daemon-reload</code></pre>
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code></code>sudo systemctl enable qq.service</code></pre>
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code></code>sudo systemctl start qq.service</code></pre>
+# 检查服务状态
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code></code>sudo systemctl status qq.service</code></pre>
+<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>    
+    require('dotenv').config();
+    const { Telegraf } = require('telegraf');
+    const tencentcloud = require("tencentcloud-sdk-nodejs");
+    
+    const TmtClient = tencentcloud.tmt.v20180321.Client;
+    
+    // 创建 tmt 客户端
+    const clientConfig = {
+        credential: {
+            secretId: process.env.TENCENT_SECRET_ID,
+            secretKey: process.env.TENCENT_SECRET_KEY,
+        },
+        region: process.env.TENCENT_REGION,
+        profile: {
+            signMethod: "TC3-HMAC-SHA256",
+            httpProfile: {
+                reqMethod: "POST",
+                reqTimeout: 30,
+            },
+        },
+    };
+    
+    const tmtClient = new TmtClient(clientConfig);
+    
+    const botToken = process.env.TELEGRAM_API_KEY;
+    const bot = new Telegraf(botToken);
+    
+    const allowedUserId = parseInt(process.env.TELEGRAM_CHAT_ID);
+    
+    // 文本翻译
+    async function translateText(text, sourceLang, targetLang) {
+        const params = {
+            SourceText: text,
+            Source: sourceLang,
+            Target: targetLang,
+            ProjectId: 1323297
+        };
+    
+        try {
+            const response = await tmtClient.TextTranslate(params);
+            return response?.TargetText || null;
+        } catch (error) {
+            console.error('翻译错误：', error);
+            return null;
+        }
+    }
+    
+    function splitMessage(text) {
+        const maxLength = 4096;
+        const messages = [];
+        while (text.length > 0) {
+            messages.push(text.substring(0, maxLength));
+            text = text.substring(maxLength);
+        }
+        return messages;
+    }
+    
+    // 处理文本消息
+    bot.on('text', async (ctx) => {
+        if (ctx.message.from.id !== allowedUserId) {
+            return ctx.reply('对不起，你没有权限使用此机器人。');
+        }
+    
+        const text = ctx.message.text;
+        const isAllChinese = /^[\u4e00-\u9fa5\s]+$/.test(text);
+        const containsChinese = /[\u4e00-\u9fa5]/.test(text);
+    
+        let sourceLang, targetLang;
+    
+        if (isAllChinese) {
+            // 如果是全中文，翻译成英文
+            sourceLang = 'zh';
+            targetLang = 'en';
+        } else if (containsChinese) {
+            // 如果包含中文，翻译成中文
+            sourceLang = 'auto';
+            targetLang = 'zh';
+        } else {
+            // 如果不包含中文，翻译成中文
+            sourceLang = 'auto';
+            targetLang = 'zh';
+        }
+    
+        const translatedText = await translateText(text, sourceLang, targetLang);
+    
+        if (translatedText) {
+            const messages = splitMessage(translatedText);
+            for (const msg of messages) {
+                await ctx.reply(msg);
+            }
+        } else {
+            ctx.reply('翻译失败，请稍后再试。');
+        }
+    });
+    
+    bot.launch();</code></pre>
+
+</div><script src=script.js></script><footer><a href=https://t.me/g9999_bot/ target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
