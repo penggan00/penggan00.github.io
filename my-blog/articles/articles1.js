@@ -35,7 +35,7 @@ const articles1 = [
     { title: "按年份查找GAME", link: "articles/post/34.html", lastModified: "2024-06-29 00:21:00" },
     { title: "wireguard", link: "articles/post/35.html", lastModified: "2024-06-29 00:31:00" },
     { title: "linux命令大全", link: "articles/post/36.html", lastModified: "2024-06-29 00:41:00" },
-    { title: "无", link: "articles/post/37.html", lastModified: "2024-07-01 00:41:00" },
+    { title: "PassWall2", link: "articles/post/37.html", lastModified: "2024-07-01 00:41:00" },
     { title: "京东云AX1800亚瑟", link: "articles/post/38.html", lastModified: "2024-07-10 00:41:00" },
     { title: "s905 EmuELEC", link: "articles/post/39.html", lastModified: "2024-07-13 00:41:00" },
     { title: "各种智能电视开启ADB", link: "articles/post/40.html", lastModified: "2024-07-13 00:41:00" },
