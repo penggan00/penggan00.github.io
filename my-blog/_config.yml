@@ -1,0 +1,15 @@
+title: Peng Gan Blog
+baseurl: "" # 如果是GitHub Pages项目页需设置"/repo-name"
+plugins:
+  - jekyll-paginate-v2
+
+# 分页配置
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num/'
+  sort_field: 'lastModified'
+  sort_reverse: true
+
+include:
+  - articles  # 包含原有HTML文章目录
