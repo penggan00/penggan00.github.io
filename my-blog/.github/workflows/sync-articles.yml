@@ -1,0 +1,46 @@
+name: Sync Markdown to JS
+on: [push]
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 生成文章数据
+        run: |
+          # 创建临时Python脚本
+          cat << 'EOF' > convert.py
+          import glob
+          import json
+          import os
+          from datetime import datetime
+
+          posts = []
+          for md in glob.glob('markdown/_posts/*.md'):
+              with open(md) as f:
+                  content = f.read()
+              meta = {}
+              if content.startswith('---'):
+                  _, front, _ = content.split('---', 2)
+                  for line in front.strip().split('\n'):
+                      if ':' in line:
+                          k, v = line.split(':', 1)
+                          meta[k.strip()] = v.strip().strip('"\'')
+              
+              posts.append({
+                  "title": meta.get('title', os.path.basename(md)[11:-3]),
+                  "link": meta.get('link', f"/articles/post/{len(posts)+51}.html"),
+                  "lastModified": meta.get('date', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+              })
+
+          with open('assets/js/articles-data.js', 'w') as f:
+              f.write(f"const articlesFromMD = {json.dumps(posts, ensure_ascii=False)};")
+          EOF
+
+          python convert.py
+      - name: 提交更改
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add assets/js/articles-data.js
+          git commit -m "自动更新文章数据" || echo "无变更"
+          git push

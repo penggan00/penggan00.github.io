@@ -1,0 +1,24 @@
+name: Sync Markdown
+on: [push]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 处理Markdown
+        run: |
+          # 自动分配ID（从60开始避免冲突）
+          NEXT_ID=$(ls -1 articles/post | wc -l | awk '{print $1 + 60}')
+          
+          # 转换Markdown并更新数据
+          for MD in markdown/_posts/*.md; do
+            HTML="articles/post/${NEXT_ID}.html"
+            pandoc "$MD" -o "$HTML"
+            echo "{ title: \"$(grep 'title:' "$MD\"... }," >> articles/articles1.js
+            ((NEXT_ID++))
+          done
+      - name: 提交更改
+        run: |
+          git add articles/
+          git commit -m "Auto: Add new posts" || exit 0
+          git push
