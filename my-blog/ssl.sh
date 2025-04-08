@@ -141,5 +141,5 @@ acme.sh --renew -d $DOMAIN --server $CA_SERVER
 EOF
 chmod +x /root/renew_cert.sh
 
-# 创建自动续期的 cron 任务，每天午夜执行一次
+# 创建自动续期的 cron 任务，每天午夜执行7天次
 (crontab -l 2>/dev/null; echo "0 0 7 * * /root/renew_cert.sh > /dev/null 2>&1") | crontab -
