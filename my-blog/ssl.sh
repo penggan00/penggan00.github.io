@@ -116,16 +116,11 @@ install_dependencies() {
 load_config() {
     log "INFO" "正在加载配置..."
     
-    local env_file="/tmp/certbot_${RANDOM}.env"
+    local env_file="/root/rss/.env"  # 修改为你的.env绝对路径
     
-    # 尝试从远程获取.env配置
-    if curl -fsSL https://penggan00.github.io/my-blog/certbot.env -o "$env_file" 2>/dev/null; then
-        log "INFO" "检测到远程配置文件，加载环境变量"
-        source "$env_file"
-        shred -u "$env_file" 2>/dev/null
-    elif [ -f "${SCRIPT_DIR}/.env" ]; then
+    if [ -f "$env_file" ]; then
         log "INFO" "检测到本地.env文件，加载环境变量"
-        source "${SCRIPT_DIR}/.env"
+        source "$env_file"
     else
         log "WARNING" "未找到配置文件，将使用手动输入"
     fi
