@@ -2,7 +2,7 @@
 
 # ==============================================
 # Certbot SSL证书自动化管理脚本 (Root用户专用版)
-# 版本：2.2 (优化版)
+# 版本：2.3 (增加自动续签功能)
 # 最后更新：2024-05-01
 # 项目地址：https://github.com/penggan00/my-blog
 # ==============================================
@@ -21,8 +21,8 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 # 配置参数
-RENEW_THRESHOLD=30
-CHECK_INTERVAL=7
+RENEW_THRESHOLD=30  # 到期前30天自动续签
+CHECK_INTERVAL=7    # 每7天检查一次
 LOG_FILE="/var/log/certbot_renew.log"
 BACKUP_DIR="/etc/letsencrypt_backup"
 CONFIG_DIR="/etc/letsencrypt"
@@ -55,6 +55,76 @@ log() {
 error_exit() {
     log "ERROR" "$1"
     exit 1
+}
+
+# 检查证书到期天数
+check_cert_expiry() {
+    local domain=$1
+    local cert_path="/etc/letsencrypt/live/$domain/cert.pem"
+    
+    if [ ! -f "$cert_path" ]; then
+        log "ERROR" "证书文件不存在: $cert_path"
+        return 1
+    fi
+    
+    local expiry_date=$(openssl x509 -in "$cert_path" -noout -enddate | cut -d= -f2)
+    local expiry_epoch=$(date --date="$expiry_date" +%s)
+    local now_epoch=$(date +%s)
+    local days_remaining=$(( (expiry_epoch - now_epoch) / 86400 ))
+    
+    echo "$days_remaining"
+    return 0
+}
+
+# 自动续签函数
+auto_renew() {
+    log "INFO" "开始证书自动续签检查..."
+    
+    IFS=' ' read -ra DOMAIN_ARRAY <<< "$DOMAINS"
+    local need_renew=false
+    
+    # 检查每个证书的到期时间
+    for domain in "${DOMAIN_ARRAY[@]}"; do
+        local days_left
+        days_left=$(check_cert_expiry "$domain") || continue
+        
+        log "INFO" "域名 $domain 证书剩余有效期: $days_left 天"
+        
+        if [ "$days_left" -le "$RENEW_THRESHOLD" ]; then
+            log "WARNING" "域名 $domain 证书将在 $days_left 天后到期，需要续签"
+            need_renew=true
+            break
+        fi
+    done
+    
+    # 执行续签
+    if [ "$need_renew" = true ]; then
+        log "INFO" "正在尝试续签证书..."
+        
+        if certbot renew --noninteractive --quiet; then
+            log "SUCCESS" "证书续签成功"
+            
+            # 重启相关服务
+            for service in nginx apache2 httpd; do
+                if systemctl is-active --quiet "$service"; then
+                    systemctl reload "$service" && log "INFO" "已重启服务: $service"
+                fi
+            done
+            
+            # 发送通知邮件
+            if command -v mail &>/dev/null; then
+                echo "证书续签成功于 $(hostname) 服务器，时间: $(date)" | mail -s "证书续签成功通知" "$EMAIL_USER"
+            fi
+        else
+            log "ERROR" "证书续签失败"
+            if command -v mail &>/dev/null; then
+                echo "证书续签失败于 $(hostname) 服务器，时间: $(date)" | mail -s "证书续签失败警报" "$EMAIL_USER"
+            fi
+            return 1
+        fi
+    else
+        log "INFO" "所有证书有效期均超过 $RENEW_THRESHOLD 天，无需续签"
+    fi
 }
 
 # 系统检查
@@ -95,6 +165,7 @@ install_dependencies() {
         "mailutils"
         "bc"
         "jq"
+        "openssl"
     )
     
     for pkg in "${dependencies[@]}"; do
@@ -245,23 +316,112 @@ setup_renewal() {
     
     local renew_script="/usr/local/bin/certbot_renew.sh"
     
+    # 创建自动续签脚本
     cat > "$renew_script" <<EOF
 #!/bin/bash
-exec > >(tee -a "$LOG_FILE") 2>&1
-if certbot renew --noninteractive --quiet; then
-    echo "\$(date '+%Y-%m-%d %H:%M:%S') - 证书续签成功"
-else
-    echo "\$(date '+%Y-%m-%d %H:%M:%S') - 证书续签失败"
+# 自动续签脚本 - 每${CHECK_INTERVAL}天执行一次检查
+
+# 加载环境变量
+if [ -f "$(dirname "\$0")/.env" ]; then
+    source "$(dirname "\$0")/.env"
 fi
+
+# 日志记录
+log() {
+    echo "\$(date '+%Y-%m-%d %H:%M:%S') - \$1" >> "$LOG_FILE"
+}
+
+# 检查证书到期天数
+check_cert_expiry() {
+    local domain=\$1
+    local cert_path="/etc/letsencrypt/live/\$domain/cert.pem"
+    
+    if [ ! -f "\$cert_path" ]; then
+        log "ERROR 证书文件不存在: \$cert_path"
+        return 1
+    fi
+    
+    local expiry_date=\$(openssl x509 -in "\$cert_path" -noout -enddate | cut -d= -f2)
+    local expiry_epoch=\$(date --date="\$expiry_date" +%s)
+    local now_epoch=\$(date +%s)
+    local days_remaining=\$(( (expiry_epoch - now_epoch) / 86400 ))
+    
+    echo "\$days_remaining"
+    return 0
+}
+
+# 主续签逻辑
+main_renew() {
+    log "开始证书自动续签检查..."
+    
+    IFS=' ' read -ra DOMAIN_ARRAY <<< "$DOMAINS"
+    local need_renew=false
+    
+    # 检查每个证书的到期时间
+    for domain in "\${DOMAIN_ARRAY[@]}"; do
+        days_left=\$(check_cert_expiry "\$domain") || continue
+        
+        log "域名 \$domain 证书剩余有效期: \$days_left 天"
+        
+        if [ "\$days_left" -le "$RENEW_THRESHOLD" ]; then
+            log "WARNING 域名 \$domain 证书将在 \$days_left 天后到期，需要续签"
+            need_renew=true
+            break
+        fi
+    done
+    
+    # 执行续签
+    if [ "\$need_renew" = true ]; then
+        log "正在尝试续签证书..."
+        
+        if certbot renew --noninteractive --quiet; then
+            log "SUCCESS 证书续签成功"
+            
+            # 重启相关服务
+            for service in nginx apache2 httpd; do
+                if systemctl is-active --quiet "\$service"; then
+                    systemctl reload "\$service" && log "已重启服务: \$service"
+                fi
+            done
+            
+            # 发送通知邮件
+            if command -v mail &>/dev/null; then
+                echo "证书续签成功于 \$(hostname) 服务器，时间: \$(date)" | mail -s "证书续签成功通知" "$EMAIL_USER"
+            fi
+        else
+            log "ERROR 证书续签失败"
+            if command -v mail &>/dev/null; then
+                echo "证书续签失败于 \$(hostname) 服务器，时间: \$(date)" | mail -s "证书续签失败警报" "$EMAIL_USER"
+            fi
+            exit 1
+        fi
+    else
+        log "所有证书有效期均超过 $RENEW_THRESHOLD 天，无需续签"
+    fi
+}
+
+# 执行主函数
+main_renew
 EOF
     
     chmod 750 "$renew_script"
-    local cron_job="0 3 */$CHECK_INTERVAL * * $renew_script"
+    
+    # 添加cron任务
+    local cron_job="0 3 */${CHECK_INTERVAL} * * ${renew_script}"
+    
     if ! crontab -l | grep -q "$renew_script"; then
         (crontab -l 2>/dev/null; echo "$cron_job") | crontab -
         log "SUCCESS" "自动续签已配置，计划任务: $cron_job"
     else
         log "INFO" "自动续签任务已存在，跳过配置"
+    fi
+    
+    # 立即执行一次检查
+    log "INFO" "正在执行首次证书检查..."
+    if bash "$renew_script"; then
+        log "SUCCESS" "首次证书检查完成"
+    else
+        log "ERROR" "首次证书检查失败"
     fi
 }
 
@@ -279,6 +439,8 @@ main() {
     log "SUCCESS" "SSL证书管理完成！"
     echo -e "\n${GREEN}=== 操作结果 ===${NC}"
     echo -e "证书保存路径: /etc/letsencrypt/live/YOUR_DOMAIN/"
+    echo -e "续签检查间隔: 每${CHECK_INTERVAL}天一次"
+    echo -e "自动续签阈值: 到期前${RENEW_THRESHOLD}天"
     echo -e "续签日志文件: $LOG_FILE"
     echo -e "手动测试续签: certbot renew --dry-run"
     echo -e "${GREEN}=================================${NC}"
