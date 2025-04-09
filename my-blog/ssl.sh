@@ -116,13 +116,16 @@ install_dependencies() {
 load_config() {
     log "INFO" "正在加载配置..."
     
-    local env_file="/root/rss/.env"  # 修改为你的.env绝对路径
+    # 获取脚本所在目录
+    local script_dir
+    script_dir=$(dirname "$(readlink -f "$0")")
+    local env_file="${script_dir}/.env"
     
     if [ -f "$env_file" ]; then
         log "INFO" "检测到本地.env文件，加载环境变量"
         source "$env_file"
     else
-        log "WARNING" "未找到配置文件，将使用手动输入"
+        log "WARNING" "未找到配置文件 ${env_file}，将使用手动输入"
     fi
     
     # 获取Cloudflare API Token
