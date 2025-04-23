@@ -12,7 +12,8 @@ sudo apt install -y --no-install-recommends \
     python3-venv \
     ca-certificates \
     gnupg \
-    lsb-release
+    lsb-release \
+    nano
 
 # 2. 配置虚拟内存（1GB）
 fallocate -l 1G /swapfile && \
@@ -20,8 +21,8 @@ chmod 600 /swapfile && \
 mkswap /swapfile && \
 swapon /swapfile && \
 echo "/swapfile none swap sw 0 0" >> /etc/fstab && \
-sysctl vm.swappiness=60 && \
-echo "vm.swappiness=60" >> /etc/sysctl.conf
+sysctl vm.swappiness=10 && \
+echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 # 3. 设置新加坡时区
 timedatectl set-timezone Asia/Singapore && \
