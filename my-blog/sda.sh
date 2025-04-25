@@ -13,10 +13,10 @@ boot() {
     # 挂载第一块硬盘
     if [ -b /dev/sda1 ]; then
         mkdir -p /mnt/hp
-        if ! mount UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp; then
+        if ! mount UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp; then
             logger -t mount_hp "sda1挂载失败，尝试修复..."
             fsck -y /dev/sda1
-            mount UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp || {
+            mount UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp || {
                 logger -t mount_hp "sda1最终挂载失败"
             }
         fi
@@ -25,10 +25,10 @@ boot() {
     # 挂载第二块硬盘
     if [ -b /dev/sdb1 ]; then
         mkdir -p /mnt/hp1
-        if ! mount UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp1; then
+        if ! mount UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp1; then
             logger -t mount_hp "sdb1挂载失败，尝试修复..."
             fsck -y /dev/sdb1
-            mount UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp1 || {
+            mount UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp1 || {
                 logger -t mount_hp "sdb1最终挂载失败"
             }
         fi
@@ -46,8 +46,8 @@ chmod +x /etc/init.d/mount_hp
 
 # 配置fstab备份
 cat <<EOF >> /etc/fstab
-UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp  ext4  rw,nofail,noatime  0 1
-UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp1 ext4  rw,nofail,noatime  0 1
+UUID=e0280430-4e37-471a-b784-ad948d7e48f4 /mnt/hp  ext4  rw,nofail,noatime  0 1
+UUID=0da13076-ccf7-4bd3-8d54-0b51bb4b33f5 /mnt/hp1 ext4  rw,nofail,noatime  0 1
 EOF
 
 # 创建挂载点
