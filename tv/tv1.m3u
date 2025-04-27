@@ -79,13 +79,13 @@ http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225702/index.m3u8
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://215155.xyz/tv/tv/江西卫视.png" group-title="IPTV",江西卫视
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225492/2/index.m3u8?fmt=ts2hls
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226344/index.m3u8
-#EXTINF:-1 tvg-name="江西都市频道" tvg-logo="https://215155.xyz/tv/tv/江西都市频道.png" group-title="IPTV",江西都市
+#EXTINF:-1 tvg-name="江西都市频道" tvg-logo="https://215155.xyz/tv/tv/江西都市.png" group-title="IPTV",江西都市
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225584/index.m3u8?fmt=ts2hls
 #EXTINF:-1 tvg-name="江西经济生活" tvg-logo="https://215155.xyz/tv/tv/江西经济生活.png" group-title="IPTV",江西经济
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226206/index.m3u8?fmt=ts2hls
-#EXTINF:-1 tvg-name="江西影视旅游" tvg-logo="https://215155.xyz/tv/tv/江西影视旅游.png" group-title="IPTV",江西影视
+#EXTINF:-1 tvg-name="江西影视旅游" tvg-logo="https://215155.xyz/tv/tv/江西影视.png" group-title="IPTV",江西影视
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226291/index.m3u8?fmt=ts2hls
-#EXTINF:-1 tvg-name="江西公共农业" tvg-logo="https://215155.xyz/tv/tv/江西公共农业.png" group-title="IPTV",江西公共
+#EXTINF:-1 tvg-name="江西公共农业" tvg-logo="https://215155.xyz/tv/tv/江西公共.png" group-title="IPTV",江西公共
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225578/index.m3u8?fmt=ts2hls
 #EXTINF:-1 tvg-name="江西少儿频道" tvg-logo="https://215155.xyz/tv/tv/江西少儿.png" group-title="IPTV",江西少儿
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226194/index.m3u8?fmt=ts2hls
@@ -143,13 +143,13 @@ http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225715/index.m3u8
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225717/index.m3u8
 #EXTINF:-1 tvg-name="newtv超级电视剧" tvg-logo="https://215155.xyz/tv/tv/NEWTV超级电视剧.png" group-title="IPTV",超级电视剧
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225716/index.m3u8
-#EXTINF:-1 tvg-name="NewTV惊悚悬疑" tvg-logo="https://live.fanmingming.cn/tv/NewTV惊悚悬疑.png" group-title="IPTV",惊悚悬疑
+#EXTINF:-1 tvg-name="NewTV惊悚悬疑" tvg-logo="https://215155.xyz/tv/惊悚悬疑.png" group-title="IPTV",惊悚悬疑
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225665/index.m3u8
-#EXTINF:-1 tvg-name="NewTV动作电影" tvg-logo="https://live.fanmingming.cn/tv/NewTV动作电影.png" group-title="IPTV",动作电影
+#EXTINF:-1 tvg-name="NewTV动作电影" tvg-logo="https://215155.xyz/tv/动作电影.png" group-title="IPTV",动作电影
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225661/index.m3u8
-#EXTINF:-1 tvg-name="NewTV爱情喜剧" tvg-logo="https://live.fanmingming.cn/tv/NewTV爱情喜剧.png" group-title="IPTV",爱情喜剧
+#EXTINF:-1 tvg-name="NewTV爱情喜剧" tvg-logo="https://215155.xyz/tv/爱情喜剧.png" group-title="IPTV",爱情喜剧
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225669/index.m3u8
-#EXTINF:-1 tvg-name="NewTV东北热剧" tvg-logo="https://live.fanmingming.cn/tv/NewTV东北热剧.png" group-title="IPTV",东北热剧
+#EXTINF:-1 tvg-name="NewTV东北热剧" tvg-logo="https://215155.xyz/tv/东北热剧.png" group-title="IPTV",东北热剧
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225741/index.m3u8
 #EXTINF:-1 tvg-name="newtv军旅剧场" tvg-logo="https://215155.xyz/tv/tv/NEWTV军旅剧场.png" group-title="IPTV",军旅剧场
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225676/index.m3u8
