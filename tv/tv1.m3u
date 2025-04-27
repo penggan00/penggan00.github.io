@@ -43,12 +43,9 @@ http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225637/index.m3u8
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://215155.xyz/tv/tv/CCTV13.png" group-title="IPTV",CCTV-13 新闻
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226571/index.m3u8
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225638/index.m3u8
-#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://215155.xyz/tv/tv/CCTV14.png" group-title="IPTV",CCTV-14 少儿
+#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://215155.xyz/tv/tv/CCTV14.png" group-title="少儿动画",CCTV-14 少儿
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226591/index.m3u8
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225640/index.m3u8
-#EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://215155.xyz/tv/tv/CCTV15.png" group-title="IPTV",CCTV-15 音乐
-http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226476/index.m3u8
-http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225641/index.m3u8 
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://215155.xyz/tv/tv/CCTV5+.png" group-title="IPTV",CCTV-5+ 体育赛事
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225603/index.m3u8
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221225706/index.m3u8
@@ -87,7 +84,7 @@ http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226206/index.m3u8?fmt=
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226291/index.m3u8?fmt=ts2hls
 #EXTINF:-1 tvg-name="江西公共农业" tvg-logo="https://215155.xyz/tv/tv/江西公共.png" group-title="IPTV",江西公共
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225578/index.m3u8?fmt=ts2hls
-#EXTINF:-1 tvg-name="江西少儿频道" tvg-logo="https://215155.xyz/tv/tv/江西少儿.png" group-title="IPTV",江西少儿
+#EXTINF:-1 tvg-name="江西少儿频道" tvg-logo="https://215155.xyz/tv/tv/江西少儿.png" group-title="少儿动画",江西少儿
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226194/index.m3u8?fmt=ts2hls
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://215155.xyz/tv/tv/深圳卫视.png" group-title="IPTV",深圳卫视
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226313/index.m3u8
@@ -122,31 +119,25 @@ http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226474/index.m3u8
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://215155.xyz/tv/tv/吉林卫视.png" group-title="IPTV",吉林卫视
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226355/index.m3u8?fmt=ts2hls
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226397/index.m3u8
-#EXTINF:-1 tvg-name="江西教育" tvg-logo="https://215155.xyz/tv/tv/江西教育.png" group-title="IPTV",江西教育
+#EXTINF:-1 tvg-name="江西教育" tvg-logo="https://215155.xyz/tv/tv/江西教育.png" group-title="少儿动画",江西教育
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226197/index.m3u8?fmt=ts2hls
 #EXTINF:-1 tvg-name="纪实科教" tvg-logo="https://215155.xyz/tv/tv/北京纪实科教.png" group-title="IPTV",纪实科教
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226365/index.m3u8?fmt=ts2hls
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221225676/index.m3u8
-#EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://215155.xyz/tv/tv/金鹰卡通.png" group-title="IPTV",金鹰卡通
+#EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://215155.xyz/tv/tv/金鹰卡通.png" group-title="少儿动画",金鹰卡通
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225653/index.m3u8
-#EXTINF:-1 tvg-name="哈哈炫动" tvg-logo="https://215155.xyz/tv/tv/哈哈炫动.png" group-title="IPTV",哈哈炫动
+#EXTINF:-1 tvg-name="哈哈炫动" tvg-logo="https://215155.xyz/tv/tv/哈哈炫动.png" group-title="少儿动画",哈哈炫动
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225657/index.m3u8
-#EXTINF:-1 tvg-name="黑莓动画" tvg-logo="https://215155.xyz/tv/tv/黑莓动画.png" group-title="IPTV",黑莓动画
+#EXTINF:-1 tvg-name="黑莓动画" tvg-logo="https://215155.xyz/tv/tv/黑莓动画.png" group-title="少儿动画",黑莓动画
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225662/index.m3u8
-#EXTINF:-1 tvg-name="黑莓电影" tvg-logo="https://215155.xyz/tv/tv/黑莓电影.png" group-title="IPTV",黑莓电影
-http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225743/index.m3u8
 #EXTINF:-1 tvg-name="newtv精品体育" tvg-logo="https://215155.xyz/tv/tv/NEWTV精品体育.png" group-title="IPTV",精品体育
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225674/index.m3u8
 #EXTINF:-1 tvg-name="newtv超级体育" tvg-logo="https://215155.xyz/tv/tv/NEWTV超级体育.png" group-title="IPTV",超级体育
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225715/index.m3u8
-#EXTINF:-1 tvg-name="newtv超级电影" tvg-logo="https://215155.xyz/tv/tv/NEWTV超级电影.png" group-title="IPTV",超级电影
-http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225717/index.m3u8
 #EXTINF:-1 tvg-name="newtv超级电视剧" tvg-logo="https://215155.xyz/tv/tv/NEWTV超级电视剧.png" group-title="IPTV",超级电视剧
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225716/index.m3u8
 #EXTINF:-1 tvg-name="NewTV惊悚悬疑" tvg-logo="https://215155.xyz/tv/tv/惊悚悬疑.png" group-title="IPTV",惊悚悬疑
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225665/index.m3u8
-#EXTINF:-1 tvg-name="NewTV动作电影" tvg-logo="https://215155.xyz/tv/tv/动作电影.png" group-title="IPTV",动作电影
-http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225661/index.m3u8
 #EXTINF:-1 tvg-name="NewTV爱情喜剧" tvg-logo="https://215155.xyz/tv/tv/爱情喜剧.png" group-title="IPTV",爱情喜剧
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225669/index.m3u8
 #EXTINF:-1 tvg-name="NewTV东北热剧" tvg-logo="https://215155.xyz/tv/tv/东北热剧.png" group-title="IPTV",东北热剧
@@ -173,6 +164,12 @@ http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225742/index.m3u8
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225663/index.m3u8
 #EXTINF:-1 tvg-name="newtv中国功夫" tvg-logo="https://215155.xyz/tv/tv/NEWTV中国功夫.png" group-title="IPTV",中国功夫
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225681/index.m3u8
+#EXTINF:-1 tvg-name="黑莓电影" tvg-logo="https://215155.xyz/tv/tv/黑莓电影.png" group-title="IPTV",黑莓电影
+http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225743/index.m3u8
+#EXTINF:-1 tvg-name="newtv超级电影" tvg-logo="https://215155.xyz/tv/tv/NEWTV超级电影.png" group-title="IPTV",超级电影
+http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225717/index.m3u8
+#EXTINF:-1 tvg-name="NewTV动作电影" tvg-logo="https://215155.xyz/tv/tv/动作电影.png" group-title="IPTV",动作电影
+http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225661/index.m3u8
 #EXTINF:-1 tvg-name="凤凰中文" tvg-logo="https://215155.xyz/tv/tv/凤凰卫视中文台.png" group-title="IPTV",凤凰中文
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221226248/index.m3u8
 http://ottrrs.hl.chinamobile.com:8080/PLTV/88888888/224/3221226248/index.m3u8
