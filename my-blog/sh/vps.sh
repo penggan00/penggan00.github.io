@@ -97,10 +97,10 @@ echo -e "${GREEN}[4/7] 配置虚拟内存...${NC}"
     sudo sysctl -p
 }
 
-# 5. 设置香港时区（增加NTP同步）
+# 5. 设置新加坡时区（增加NTP同步）
 echo -e "${GREEN}[5/7] 设置时区...${NC}"
 retry sudo apt-get -y install chrony > /dev/null
-sudo timedatectl set-timezone Asia/Hong_Kong
+sudo timedatectl set-timezone Asia/Singapore
 sudo timedatectl set-ntp true
 sudo systemctl restart chrony
 sudo hwclock --systohc

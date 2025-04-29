@@ -1,0 +1,14 @@
+sudo apt install wget -y
+wget https://penggan00.github.io/my-blog/sh/v2xay/installer_debian_armv7_2.2.6.6.deb
+wget https://penggan00.github.io/my-blog/sh/v2xay/v2ray_5.28.0_armhf.deb
+wget https://penggan00.github.io/my-blog/sh/v2xay/xray_25.3.6_armhf.deb
+sudo chmod 644 /root/installer_debian_armv7_2.2.6.6.deb
+sudo apt install /root/installer_debian_armv7_2.2.6.6.deb
+sudo chmod 644 /root/v2ray_5.28.0_armhf.deb
+sudo apt install /root/v2ray_5.28.0_armhf.deb
+sudo chmod 644 /root/xray_25.3.6_armhf.deb
+sudo apt install /root/xray_25.3.6_armhf.deb
+# 启动 v2rayA
+sudo systemctl start v2raya.service
+# 设置开机自动启动
+sudo systemctl enable v2raya.service
