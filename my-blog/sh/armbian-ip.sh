@@ -6,7 +6,7 @@ iface eth0 inet static
 address 192.168.3.33
 netmask 255.255.255.0
 gateway 192.168.3.1
-dns-nameservers 8.8.8.8 192.168.3.1
+dns-nameservers 8.8.8.8 223.6.6.6 223.5.5.5 1.1.1.1 192.168.3.1 
 EOF
 sudo systemctl restart networking
 # sudo nano /etc/sysctl.conf
