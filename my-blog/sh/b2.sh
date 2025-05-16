@@ -13,7 +13,7 @@ if ! command -v rclone &> /dev/null; then
 fi
 
 # 检查并加载环境变量文件
-ENV_FILE="~/rss/.env"
+ENV_FILE="/root/rss/.env"
 if [ ! -f "$ENV_FILE" ]; then
     echo "错误: 环境变量文件 $ENV_FILE 不存在" >&2
     exit 1
