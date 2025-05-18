@@ -1,80 +1,63 @@
-# socks5-hysteria2-for-serv00-ct8
-- 给 serv00 & ct8 机器一键安装 socks5 & hysteria2 & nezha-agent
-- CT8目前不推荐安装哪吒探针，安装探针容易封号。
-- serv00 & CT8 请勿安装PM2，安装PM2容易封号。
-- 在面板Additional servoces里打开Run your own applications为Enable
-- 在面板Port reservation里添加 Add port 开放UDP和TCP端口
-- Hysteria2用UDP端口，Socks5用TCP端口
-- 如果你只是为了保活登陆，serv00 ct8可以不安装任何东西，只需设置Github Actions保活
-- 如果安装部署过其它脚本，请你在安装此脚本之前用下面的清理服务器命令清除一次服务器后再安装！！！！！！
+[Hux Blog](https://huangxuan.me)
+================================
 
-## 一键脚本
-- 推荐Socks5 hysteria2 nohup模式
-```bash
-bash <(curl -s https://raw.githubusercontent.com/gshtwy/socks5-for-serv00/main/install-socks5-hysteria.sh)
-```
-- Socks5 pm2模式
+> I never expected this to become popular.
 
-~`bash <(curl -s https://raw.githubusercontent.com/gshtwy/socks5-for-serv00/main/install-socks5-pm2.sh)`~
+![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-卸载pm2
-```bash
-pm2 unstartup
-pm2 delete all
-npm uninstall -g pm2
-```
-## 清理服务器
+[User Manual 👉](_doc/Manual.md)
+--------------------------------------------------
 
-```bash
-pkill -kill -u 用户名
-chmod -R 755 ~/* 
-chmod -R 755 ~/.* 
-rm -rf ~/.* 
-rm -rf ~/*
+### Getting Started
+
+1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
+
+2. Installed dependencies in the `Gemfile`:
+
+```sh
+$ bundle install 
 ```
 
-## Github Actions保活
-添加 Secrets.`ACCOUNTS_JSON` 变量
-```json
-[
-  {"username": "cmliusss", "password": "7HEt(xeRxttdvgB^nCU6", "panel": "panel4.serv00.com", "ssh": "s4.serv00.com"},
-  {"username": "cmliussss2018", "password": "4))@cRP%HtN8AryHlh^#", "panel": "panel7.serv00.com", "ssh": "s7.serv00.com"},
-  {"username": "4r885wvl", "password": "%Mg^dDMo6yIY$dZmxWNy", "panel": "panel.ct8.pl", "ssh": "s1.ct8.pl"}
-]
-```
-# cloudflare worker部署保活
-## cloudflare 部署步骤
-- 复制worker.js代码到cloudflare Workers保存
-- Workers设置变量名称，添加 ACCOUNTS_JSON TELEGRAM_JSON 值，替换自己的账号 密码 面板
-- 在设置里设置Cron 触发器，设置触发时间。
+3. Serve the website (`localhost:4000` by default):
 
-## worker部署变量
-添加变量名称 ACCOUNTS_JSON 
-添加变量值，复制下面代码替换成自己的账号 密码 面板
-
-```json
-[  
-  { "username": "serv00user1", "password": "serv00password1", "panelnum": "0", "type": "serv00" },
-  { "username": "serv00user2", "password": "serv00password2", "panelnum": "4", "type": "serv00" },
-  { "username": "serv00user3", "password": "serv00password3", "panelnum": "7", "type": "serv00" },
-  { "username": "ct8user1", "password": "ct8password1", "type": "ct8" },
-  { "username": "ct8user2", "password": "ct8password2", "type": "ct8" }
-]
+```sh
+$ bundle exec jekyll serve  # alternatively, npm start
 ```
 
-添加变量名称 TELEGRAM_JSON 
-添加变量值，复制下面代码替换成自己的TG TOKEN ID
+### Development (Build From Source)
 
-```json
-{
-  "telegramBotToken": "YOUR_BOT_TOKEN",
-  "telegramBotUserId": "YOUR_USER_ID"
-}
-```
+To modify the theme, you will need [Grunt](https://gruntjs.com/). There are numbers of tasks you can find in the `Gruntfile.js`, includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. 
 
+Yes, they were inherited and are extremely old-fashioned. There is no modularization and transpilation, etc.
 
+Critical Jekyll-related code are located in `_include/` and `_layouts/`. Most of them are [Liquid](https://github.com/Shopify/liquid/wiki) templates.
+
+This theme uses the default code syntax highlighter of jekyll, [Rouge](http://rouge.jneen.net/), which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
 
 
-# 致谢
-[RealNeoMan](https://github.com/Neomanbeta/ct8socks)、[k0baya](https://github.com/k0baya)、[eooce](https://github.com/eooce)、[cmliu](https://github.com/cmliu)
+### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
+
+
+Other Resources
+---------------
+
+Ports
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
+
+[Starter/Boilerplate](https://github.com/huxpro/huxblog-boilerplate)
+- Out of date. Helps wanted for updating it on par with the main repo
+
+Translation
+- [🇨🇳  中文文档（有点过时）](https://github.com/Huxpro/huxpro.github.io/blob/master/_doc/README.zh.md)
+
+
+License
+-------
+
+Apache License 2.0.
+Copyright (c) 2015-present Huxpro
+
+Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
+Copyright (c) 2013-2016 Blackrock Digital LLC.

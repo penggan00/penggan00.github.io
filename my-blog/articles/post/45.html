@@ -1,8 +1,21 @@
-<!doctypehtml><html lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>peng gan Blog</title><link href=styles.css rel=stylesheet><div class=header><a href=../../index.html>My Blog</a></div><div class=container><div class=subheader><h1>github-rss-youtu</h1></div><div class=date id=lastModified></div><div class=content><p>
-           
+<!doctypehtml>
+    <html lang=en>
+    <meta charset=UTF-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <title>peng gan Blog</title>
+    <link href=styles.css rel=stylesheet>
+    <div class=header><a href=../../index.html>My Blog</a></div>
+    <div class=container>
+        <div class=subheader>
+            <h1>github-rss-youtu</h1>
+        </div>
+        <div class=date id=lastModified></div>
+        <div class=content>
+            <p>
 
-<b>rss_youtube.yml</b>
-<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>name: RSS to Telegram
+
+                <b>rss_youtube.yml</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>name: RSS to Telegram
 
 on:
   workflow_dispatch:
@@ -55,8 +68,8 @@ jobs:
           git push origin main  # 直接推送而不拉取
 
         continue-on-error: true  # 允许此步骤出错</code></pre>
-<b>rss.py</b>
-<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>import os
+            <b>rss.py</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>import os
 import json
 import requests
 from feedparser import parse
@@ -156,8 +169,8 @@ def main():
 
 if __name__ == "__main__":
     main()</code></pre>
-<b>youtube.py</b>
-<pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>import os
+            <b>youtube.py</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>import os
 import json
 import requests
 from feedparser import parse
@@ -246,4 +259,5 @@ def main():
 
 if __name__ == "__main__":
     main()</code></pre>
-<script src=script.js></script><footer><a href=https://t.me/pg10086bot target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
+            <script src=script.js></script>
+            <footer><a href=https://t.me/pg10086bot target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
