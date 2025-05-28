@@ -1,7 +1,7 @@
 #EXTM3U x-tvg-url="https://web.215155.xyz/epg"
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://215155.xyz/tv/tv/CCTV1.png" group-title="全部频道",CCTV-1 综合
-http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226559/index.m3u8
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225642/index.m3u8
+http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226559/index.m3u8
 http://39.134.115.163:8080/PLTV/88888910/224/3221225618/index.m3u8
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://215155.xyz/tv/tv/CCTV2.png" group-title="全部频道",CCTV-2 财经
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225643/index.m3u8
@@ -39,9 +39,9 @@ http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226473/index.m3u8
 http://39.134.115.163:8080/PLTV/88888910/224/3221225636/index.m3u8
 http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225636/index.m3u8
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://215155.xyz/tv/tv/CCTV11.png" group-title="全部频道",CCTV-11 戏曲
+http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225628/index.m3u8
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226565/index.m3u8
 http://39.134.115.163:8080/PLTV/88888910/224/3221226349/index.m3u8
-http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225628/index.m3u8
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://215155.xyz/tv/tv/CCTV12.png" group-title="全部频道",CCTV-12 社会与法
 http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226568/index.m3u8
 http://39.134.115.163:8080/PLTV/88888910/224/3221225637/index.m3u8
