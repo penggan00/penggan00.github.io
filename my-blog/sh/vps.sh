@@ -1,127 +1,80 @@
 #!/bin/bash
 
-# Ubuntu 全自动配置脚本 (支持 x86/ARM)
-# 功能：系统更新、基础工具、Docker、虚拟内存、时区、SSH保活、BBR加速
-# 优化：自动适配官方仓库、安装错误重试、架构检测优化
+# VPS 一键初始化脚本 (支持 sudo 用户执行)
+set -e  # 遇到任何错误立即退出
 
-set -euo pipefail
+echo "🚀 开始 VPS 初始化配置..."
 
-# 颜色定义
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m'
+# 1. 系统更新及基础工具安装 (使用 sudo)
+echo "[1/6] 正在更新系统并安装基础工具..."
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install -y --no-install-recommends \
+  curl wget git htop tmux zip unzip net-tools nano \
+  python3-venv postgresql-client docker.io
 
-# 非交互式环境变量
-export DEBIAN_FRONTEND=noninteractive
-export NEEDRESTART_MODE=a
+echo "✅ 系统更新及基础工具安装完成"
 
-# 错误重试函数
-function retry() {
-    local n=1
-    local max=3
-    while true; do
-        "$@" && break || {
-            echo -e "${YELLOW}命令失败，重试 $n/$max...${NC}"
-            ((n++))
-            sleep 2
-            if [[ $n -ge $max ]]; then
-                echo -e "${RED}最终重试失败，请检查日志${NC}"
-                return 1
-            fi
-        }
-    done
-}
+# 2. Docker配置 (使用 sudo)
+echo "[2/6] 正在配置Docker服务..."
+sudo usermod -aG docker $USER  # 将当前用户加入docker组
+sudo systemctl start docker
+sudo systemctl enable docker
+echo "✅ Docker 已安装并启动，用户 $USER 已加入 docker 组"
 
-# 检查系统
-if ! grep -qi 'ubuntu' /etc/os-release; then
-    echo -e "${RED}错误：仅支持 Ubuntu 系统${NC}"
-    exit 1
-fi
+# 3. 设置新加坡时区 (使用 sudo)
+echo "[3/6] 正在设置新加坡时区..."
+sudo timedatectl set-timezone Asia/Singapore
+sudo timedatectl set-local-rtc 0
+sudo hwclock --systohc
+echo "✅ 新加坡时间已永久设置（UTC+8）"
 
-# 1. 系统更新
-echo -e "${GREEN}[1/7] 系统更新...${NC}"
-retry sudo apt-get -qq update
-retry sudo apt-get -y -o Dpkg::Options::="--force-confdef" \
-    -o Dpkg::Options::="--force-confold" \
-    upgrade
-sudo apt-get -y autoremove
+# 4. BBR加速 (需要 root 权限，使用 sudo)
+echo "[4/6] 正在安装 BBR 加速..."
+wget --no-check-certificate -O /tmp/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
+chmod +x /tmp/bbr.sh
+sudo /tmp/bbr.sh 2>&1 | tee /tmp/bbr-install.log
+echo "✅ BBR 加速已安装，需要重启生效"
 
-# 2. 安装基础工具（增加必要依赖）
-echo -e "${GREEN}[2/7] 安装基础工具...${NC}"
-retry sudo apt-get -y install --no-install-recommends \
-    software-properties-common \
-    apt-transport-https \
-    ca-certificates \
-    curl wget git htop \
-    gnupg2 jq tmux \
-    zip unzip net-tools > /dev/null
+# 5. SSH保活设置 (使用 sudo)
+echo "[5/6] 正在配置SSH保活..."
+echo "net.ipv4.tcp_keepalive_time = 60" | sudo tee -a /etc/sysctl.conf
+echo "net.ipv4.tcp_keepalive_intvl = 30" | sudo tee -a /etc/sysctl.conf
+echo "net.ipv4.tcp_keepalive_probes = 3" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
 
-# 3. 安装Docker（优化架构检测和源配置）
-echo -e "${GREEN}[3/7] 安装Docker...${NC}"
-if ! command -v docker &> /dev/null; then
-    # 精确架构检测
-    ARCH=$(uname -m)
-    case "$ARCH" in
-        x86_64)  DOCKER_ARCH="amd64" ;;
-        aarch64) DOCKER_ARCH="arm64" ;;
-        *)       echo -e "${RED}不支持的架构: $ARCH${NC}"; exit 1 ;;
-    esac
+# 为用户配置 SSH（不需要 sudo）
+mkdir -p ~/.ssh
+echo -e "Host *\n  ServerAliveInterval 50\n  ServerAliveCountMax 3\n  TCPKeepAlive yes" >> ~/.ssh/config
+chmod 600 ~/.ssh/config
+echo "✅ SSH 保活设置完成"
 
-    # 安装Docker官方源（带重试和证书验证）
-    sudo mkdir -p /etc/apt/keyrings
-    retry curl -fsSL --retry 3 https://download.docker.com/linux/ubuntu/gpg | \
-        sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo "deb [arch=$DOCKER_ARCH signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    retry sudo apt-get -qq update
-    retry sudo apt-get -y install \
-        docker-ce docker-ce-cli \
-        containerd.io docker-buildx-plugin \
-        docker-compose-plugin > /dev/null
-
-    sudo usermod -aG docker "$USER"
-    sudo systemctl enable --now docker
-fi
-
-# 4. 配置虚拟内存（优化内存分配）
-echo -e "${GREEN}[4/7] 配置虚拟内存...${NC}"
-[ -f /swapfile ] || {
-    sudo fallocate -l 1G /swapfile
+# 6. 创建1GB虚拟内存 (使用 sudo)
+echo "[6/6] 正在创建1GB虚拟内存..."
+if [ -f /swapfile ]; then
+    echo "⚠️  发现已有 swapfile，跳过创建"
+else
+    sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
     sudo chmod 600 /swapfile
     sudo mkswap /swapfile
     sudo swapon /swapfile
-    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-    echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
-    sudo sysctl -p
-}
-
-# 5. 设置新加坡时区（增加NTP同步）
-echo -e "${GREEN}[5/7] 设置时区...${NC}"
-retry sudo apt-get -y install chrony > /dev/null
-sudo timedatectl set-timezone Asia/Singapore
-sudo timedatectl set-ntp true
-sudo systemctl restart chrony
-sudo hwclock --systohc
-
-# 6. 配置SSH保活（优化参数）
-echo -e "${GREEN}[6/7] 配置SSH...${NC}"
-sudo sed -i '/ClientAliveInterval/d;/ClientAliveCountMax/d' /etc/ssh/sshd_config
-echo "ClientAliveInterval 30" | sudo tee -a /etc/ssh/sshd_config
-echo "ClientAliveCountMax 5" | sudo tee -a /etc/ssh/sshd_config
-sudo systemctl restart sshd
-
-# 7. 安装BBR（优化内核检测）
-echo -e "${GREEN}[7/7] 启用BBR加速...${NC}"
-if ! grep -q "net.core.default_qdisc=fq" /etc/sysctl.conf; then
-    retry wget --no-check-certificate -qO /tmp/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
-    chmod +x /tmp/bbr.sh
-    echo -e "1\n" | sudo /tmp/bbr.sh > /dev/null
-    rm -f /tmp/bbr.sh
-else
-    echo -e "${YELLOW}BBR 已启用，跳过安装${NC}"
+    echo "/swapfile none swap sw 0 0" | sudo tee -a /etc/fstab
+    echo "✅ 1GB 虚拟内存已创建并启用"
 fi
 
-echo -e "\n${GREEN}全自动配置完成！${NC}"
-echo -e "建议执行 ${YELLOW}reboot${NC} 重启系统"
+echo -e "\n📊 内存状态："
+free -h
+
+# 7. 验证安装
+echo -e "\n🎉 所有安装已完成！验证信息："
+echo -e "Docker 版本: $(docker --version 2>/dev/null || echo '未安装成功')"
+echo -e "PostgreSQL 客户端版本: $(psql --version 2>/dev/null || echo '未安装成功')"
+echo -e "当前时区: $(timedatectl | grep 'Time zone' | cut -d':' -f2-)"
+echo -e "BBR 状态: $(sysctl net.ipv4.tcp_congestion_control 2>/dev/null | awk '{print $3}' || echo '未启用')"
+
+echo -e "\n⚠️  重要提示："
+echo "1. 部分更改（如用户组更新）需要重新登录或重启才能生效"
+echo "2. BBR 加速需要重启后生效"
+echo "3. 建议执行: sudo reboot 重启系统"
+
+echo -e "\n✨ 初始化脚本执行完毕！"
