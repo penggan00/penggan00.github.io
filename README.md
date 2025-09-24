@@ -9,7 +9,7 @@
 [User Manual 👉](_doc/Manual.md)
 --------------------------------------------------
 
-### Getting Started
+##### Getting Started
 
 1. You will need [Ruby](https://www.ruby-lang.org/en/) and [Bundler](https://bundler.io/) to use [Jekyll](https://jekyllrb.com/). Following [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to fullfill the enviromental requirement.
 
@@ -25,7 +25,7 @@ $ bundle install
 $ bundle exec jekyll serve  # alternatively, npm start
 ```
 
-### Development (Build From Source)
+##### Development (Build From Source)
 
 To modify the theme, you will need [Grunt](https://gruntjs.com/). There are numbers of tasks you can find in the `Gruntfile.js`, includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. 
 
@@ -36,7 +36,7 @@ Critical Jekyll-related code are located in `_include/` and `_layouts/`. Most of
 This theme uses the default code syntax highlighter of jekyll, [Rouge](http://rouge.jneen.net/), which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
 
 
-### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
+##### Interesting to know more? Checkout the [full user manual](_doc/Manual.md)!
 
 
 Other Resources
