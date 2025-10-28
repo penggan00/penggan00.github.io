@@ -10,8 +10,9 @@ echo "[2/6] 检查当前开放的端口 (ss -tulnp)..."
 ss -tulnp
 
 # 允许 SSH (22)、HTTP (80)、HTTPS (443)
-echo "[3/6] 允许 SSH (22)、HTTP (80)、HTTPS (443)..."
+echo "[3/6] 允许 SSH (22，222)、HTTP (80)、HTTPS (443)..."
 sudo ufw allow 22
+sudo ufw allow 222
 sudo ufw allow 80
 sudo ufw allow 443
 
