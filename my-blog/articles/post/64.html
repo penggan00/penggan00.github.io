@@ -177,6 +177,34 @@
         </div>
     </header>
 
+    <div class="container">
+        <!-- 统计数据 -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-value" id="total-products">3</div>
+                    <div class="stats-label">总产品数</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-value" id="vps-count">2</div>
+                    <div class="stats-label">VPS产品</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-value" id="sc2-count">1</div>
+                    <div class="stats-label">SC2产品</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card text-center">
+                    <div class="stats-value" id="sale-count">1</div>
+                    <div class="stats-label">特价产品</div>
+                </div>
+            </div>
+        </div>
 
         <!-- 刷新信息 -->
         <div class="refresh-info">
@@ -189,7 +217,15 @@
             </button>
         </div>
 
-
+        <!-- 筛选按钮 -->
+        <div class="filter-buttons">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary active" data-filter="all">全部产品</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="vps">VPS</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="sc2">SC2</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="sale">特价优惠</button>
+            </div>
+        </div>
 
         <!-- 表格视图 -->
         <div class="table-container">
@@ -275,6 +311,12 @@
             }
         };
 
+        // 替换部署网址域名
+        function replaceDomain(url) {
+            // 将 www.215155.xyz 替换为 app.cloudcone.com
+            return url.replace('www.215155.xyz', 'app.cloudcone.com');
+        }
+
         // 产品数据提取和格式化
         function extractProducts(data) {
             const products = [];
@@ -284,6 +326,8 @@
                 const product = data.__data.vps_data[id];
                 product.type = 'vps';
                 product.hasFlashSale = product.name.includes('LA-BF-25');
+                // 替换部署网址域名
+                product.order_url = replaceDomain(product.order_url);
                 products.push(product);
             }
             
@@ -292,6 +336,8 @@
                 const product = data.__data.sc2_data[id];
                 product.type = 'sc2';
                 product.hasFlashSale = false;
+                // 替换部署网址域名
+                product.order_url = replaceDomain(product.order_url);
                 products.push(product);
             }
             
