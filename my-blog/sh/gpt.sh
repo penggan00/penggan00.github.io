@@ -10,7 +10,7 @@ SCRIPT_PATH="${APP_DIR}/gpt.py"
 # 创建 systemd 服务文件
 sudo bash -c "cat > ${SERVICE_FILE}" <<EOF
 [Unit]
-Description=QQ Service
+Description=gpt Service
 After=network.target
 
 [Service]
