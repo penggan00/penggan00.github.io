@@ -220,49 +220,8 @@
     </footer>
 
     <script>
-        // 模拟API数据
-        const apiData = {
-            "status": 1,
-            "message": "Offers retrieved successfully",
-            "__data": {
-                "html": "<tr>\n            <td class='text-left'>BF-25-SSD-VPS-1<\/td>\n            <td class='text-left'>2<\/td>\n            <td class='text-left'>1 GB<\/td>\n            <td class='text-left'>20 GB<\/td>\n            <td class='text-left'>3 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$14.99 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/440\/create?token=BF-25-SSD-VPS-1'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>LA-BF-25-HFS-2-7MHS8H71<\/td>\n            <td class='text-left'>2<\/td>\n            <td class='text-left'>2 GB<\/td>\n            <td class='text-left'>60 GB<\/td>\n            <td class='text-left'>3 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$12.49 \/YR<\/span>&nbsp;&nbsp;<span class='label label-danger label-black-friday heartbeat'>Flash Sale!<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/456\/create?token=LA-BF-25-HFS-2-7MHS8H71'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>BF-25-SC2-1<\/td>\n            <td class='text-left'>3<\/td>\n            <td class='text-left'>2 GB<\/td>\n            <td class='text-left'>60 GB<\/td>\n            <td class='text-left'>4 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$24.96 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-success'>SC2<\/span><\/td><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/compute\/1478\/create?token=BF-25-SC2-1'>Deploy<\/a><\/td>\n        <\/tr>",
-                "ttr": 37,
-                "vps_data": {
-                    "440": {
-                        "id": 440,
-                        "name": "BF-25-SSD-VPS-1",
-                        "cpu": 2,
-                        "ram": "1 GB",
-                        "disk": 20,
-                        "bandwidth": "3 TB",
-                        "usd_price": 14.99,
-                        "order_url": "/vps/440/create?token=BF-25-SSD-VPS-1"
-                    },
-                    "456": {
-                        "id": 456,
-                        "name": "LA-BF-25-HFS-2-7MHS8H71",
-                        "cpu": 2,
-                        "ram": "2 GB",
-                        "disk": 60,
-                        "bandwidth": "3 TB",
-                        "usd_price": 12.49,
-                        "order_url": "/vps/456/create?token=LA-BF-25-HFS-2-7MHS8H71"
-                    }
-                },
-                "sc2_data": {
-                    "1478": {
-                        "id": 1478,
-                        "name": "BF-25-SC2-1",
-                        "cpu": 0,
-                        "ram": "2 GB",
-                        "disk": 60,
-                        "bandwidth": "4 TB",
-                        "usd_price": 24.96,
-                        "order_url": "/compute/1478/create?token=BF-25-SC2-1"
-                    }
-                }
-            }
-        };
+        // 当前API数据
+        let currentApiData = null;
 
         // 替换部署网址域名
         function replaceDomain(url) {
@@ -270,28 +229,132 @@
             return url.replace('www.215155.xyz', 'app.cloudcone.com');
         }
 
+        // 模拟API调用 - 在实际应用中替换为真实的API调用
+        async function fetchApiData() {
+            // 这里模拟API数据的变化
+            // 在实际应用中，这里应该是真实的API调用，比如：
+            // const response = await fetch('您的API地址');
+            // return await response.json();
+            
+            // 模拟不同的API响应
+            const apiResponses = [
+                {
+                    "status": 1,
+                    "message": "Offers retrieved successfully",
+                    "__data": {
+                        "html": "<tr>\n            <td class='text-left'>BF-25-SSD-VPS-1<\/td>\n            <td class='text-left'>2<\/td>\n            <td class='text-left'>1 GB<\/td>\n            <td class='text-left'>20 GB<\/td>\n            <td class='text-left'>3 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$14.99 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/440\/create?token=BF-25-SSD-VPS-1'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>LA-BF-25-HFS-2-7MHS8H71<\/td>\n            <td class='text-left'>2<\/td>\n            <td class='text-left'>2 GB<\/td>\n            <td class='text-left'>60 GB<\/td>\n            <td class='text-left'>3 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$12.49 \/YR<\/span>&nbsp;&nbsp;<span class='label label-danger label-black-friday heartbeat'>Flash Sale!<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/456\/create?token=LA-BF-25-HFS-2-7MHS8H71'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>BF-25-SC2-1<\/td>\n            <td class='text-left'>3<\/td>\n            <td class='text-left'>2 GB<\/td>\n            <td class='text-left'>60 GB<\/td>\n            <td class='text-left'>4 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$24.96 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-success'>SC2<\/span><\/td><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/compute\/1478\/create?token=BF-25-SC2-1'>Deploy<\/a><\/td>\n        <\/tr>",
+                        "ttr": 37,
+                        "vps_data": {
+                            "440": {
+                                "id": 440,
+                                "name": "BF-25-SSD-VPS-1",
+                                "cpu": 2,
+                                "ram": "1 GB",
+                                "disk": 20,
+                                "bandwidth": "3 TB",
+                                "usd_price": 14.99,
+                                "order_url": "/vps/440/create?token=BF-25-SSD-VPS-1"
+                            },
+                            "456": {
+                                "id": 456,
+                                "name": "LA-BF-25-HFS-2-7MHS8H71",
+                                "cpu": 2,
+                                "ram": "2 GB",
+                                "disk": 60,
+                                "bandwidth": "3 TB",
+                                "usd_price": 12.49,
+                                "order_url": "/vps/456/create?token=LA-BF-25-HFS-2-7MHS8H71"
+                            }
+                        },
+                        "sc2_data": {
+                            "1478": {
+                                "id": 1478,
+                                "name": "BF-25-SC2-1",
+                                "cpu": 0,
+                                "ram": "2 GB",
+                                "disk": 60,
+                                "bandwidth": "4 TB",
+                                "usd_price": 24.96,
+                                "order_url": "/compute/1478/create?token=BF-25-SC2-1"
+                            }
+                        }
+                    }
+                },
+                {
+                    "status": 1,
+                    "message": "Offers retrieved successfully",
+                    "__data": {
+                        "html": "<tr>\n            <td class='text-left'>BF-25-SSD-VPS-3<\/td>\n            <td class='text-left'>6<\/td>\n            <td class='text-left'>4 GB<\/td>\n            <td class='text-left'>60 GB<\/td>\n            <td class='text-left'>5 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$39.50 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/442\/create?token=BF-25-SSD-VPS-3'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>LA-BF-25-HFS-2-16JWEQ6S<\/td>\n            <td class='text-left'>3<\/td>\n            <td class='text-left'>2 GB<\/td>\n            <td class='text-left'>30 GB<\/td>\n            <td class='text-left'>4 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$23.99 \/YR<\/span>&nbsp;&nbsp;<span class='label label-danger label-black-friday heartbeat'>Flash Sale!<\/span><\/td>\n            <td class='text-left'><span class='label label-info'>VPS<\/span><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/vps\/470\/create?token=LA-BF-25-HFS-2-16JWEQ6S'>Deploy<\/a><\/td>\n        <\/tr><tr>\n            <td class='text-left'>BF-25-SC2-3<\/td>\n            <td class='text-left'>10<\/td>\n            <td class='text-left'>8 GB<\/td>\n            <td class='text-left'>240 GB<\/td>\n            <td class='text-left'>6 TB<\/td>\n            <td class='text-left'><span class='text-danger'>$83.76 \/YR<\/span><\/td>\n            <td class='text-left'><span class='label label-success'>SC2<\/span><\/td><\/td>\n            <td class='text-right'><a class='btn btn-success btn-fill btn-sm' target='_blank' href='\/compute\/1480\/create?token=BF-25-SC2-3'>Deploy<\/a><\/td>\n        <\/tr>",
+                        "ttr": 28,
+                        "vps_data": {
+                            "442": {
+                                "id": 442,
+                                "name": "BF-25-SSD-VPS-3",
+                                "cpu": 6,
+                                "ram": "4 GB",
+                                "disk": 60,
+                                "bandwidth": "5 TB",
+                                "usd_price": 39.5,
+                                "order_url": "/vps/442/create?token=BF-25-SSD-VPS-3"
+                            },
+                            "470": {
+                                "id": 470,
+                                "name": "LA-BF-25-HFS-2-16JWEQ6S",
+                                "cpu": 3,
+                                "ram": "2 GB",
+                                "disk": 30,
+                                "bandwidth": "4 TB",
+                                "usd_price": 23.99,
+                                "order_url": "/vps/470/create?token=LA-BF-25-HFS-2-16JWEQ6S"
+                            }
+                        },
+                        "sc2_data": {
+                            "1480": {
+                                "id": 1480,
+                                "name": "BF-25-SC2-3",
+                                "cpu": 0,
+                                "ram": "8 GB",
+                                "disk": 240,
+                                "bandwidth": "6 TB",
+                                "usd_price": 83.76,
+                                "order_url": "/compute/1480/create?token=BF-25-SC2-3"
+                            }
+                        }
+                    }
+                }
+            ];
+            
+            // 随机选择一个API响应来模拟数据变化
+            const randomIndex = Math.floor(Math.random() * apiResponses.length);
+            return apiResponses[randomIndex];
+        }
+
         // 产品数据提取和格式化
         function extractProducts(data) {
             const products = [];
             
             // 从vps_data提取产品
-            for (const id in data.__data.vps_data) {
-                const product = data.__data.vps_data[id];
-                product.type = 'vps';
-                product.hasFlashSale = product.name.includes('LA-BF-25');
-                // 替换部署网址域名
-                product.order_url = replaceDomain(product.order_url);
-                products.push(product);
+            if (data.__data.vps_data) {
+                for (const id in data.__data.vps_data) {
+                    const product = data.__data.vps_data[id];
+                    product.type = 'vps';
+                    product.hasFlashSale = product.name.includes('LA-BF-25');
+                    // 替换部署网址域名
+                    product.order_url = replaceDomain(product.order_url);
+                    products.push(product);
+                }
             }
             
             // 从sc2_data提取产品
-            for (const id in data.__data.sc2_data) {
-                const product = data.__data.sc2_data[id];
-                product.type = 'sc2';
-                product.hasFlashSale = false;
-                // 替换部署网址域名
-                product.order_url = replaceDomain(product.order_url);
-                products.push(product);
+            if (data.__data.sc2_data) {
+                for (const id in data.__data.sc2_data) {
+                    const product = data.__data.sc2_data[id];
+                    product.type = 'sc2';
+                    product.hasFlashSale = false;
+                    // 替换部署网址域名
+                    product.order_url = replaceDomain(product.order_url);
+                    products.push(product);
+                }
             }
             
             return products;
@@ -330,20 +393,24 @@
         }
 
         // 刷新数据函数
-        function refreshData() {
-            // 在实际应用中，这里应该重新调用API获取数据
+        async function refreshData() {
             console.log('执行自动刷新...');
             
-            // 模拟API调用
             const countdownElement = document.getElementById('countdown');
             countdownElement.textContent = '更新中...';
             
-            setTimeout(() => {
-                // 模拟API调用完成
-                // 重新渲染产品（在实际应用中应该使用新的API数据）
+            try {
+                // 获取新的API数据
+                const newApiData = await fetchApiData();
+                currentApiData = newApiData;
+                
+                // 重新渲染产品
                 renderProducts();
                 console.log('数据更新完成');
-            }, 1000);
+            } catch (error) {
+                console.error('刷新数据失败:', error);
+                countdownElement.textContent = '更新失败';
+            }
         }
 
         // 倒计时功能 - 每分钟整刷新
@@ -373,7 +440,9 @@
 
         // 渲染产品
         function renderProducts() {
-            const products = extractProducts(apiData);
+            if (!currentApiData) return;
+            
+            const products = extractProducts(currentApiData);
             const tableBody = document.getElementById('tableBody');
             
             // 清空现有内容
@@ -402,9 +471,14 @@
         }
 
         // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 渲染产品
-            renderProducts();
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 首次加载数据
+            try {
+                currentApiData = await fetchApiData();
+                renderProducts();
+            } catch (error) {
+                console.error('初始化数据失败:', error);
+            }
             
             // 启动每分钟整刷新倒计时
             startCountdown();
@@ -426,20 +500,16 @@
             });
             
             // 手动刷新按钮事件
-            document.getElementById('manualRefresh').addEventListener('click', function() {
-                // 在实际应用中，这里应该重新调用API获取数据
+            document.getElementById('manualRefresh').addEventListener('click', async function() {
                 this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> 刷新中...';
                 this.disabled = true;
                 
-                setTimeout(() => {
-                    // 模拟API调用完成
+                try {
+                    await refreshData();
+                } finally {
                     this.innerHTML = '<i class="fas fa-redo me-1"></i> 立即刷新';
                     this.disabled = false;
-                    
-                    // 重新渲染产品（在实际应用中应该使用新的API数据）
-                    renderProducts();
-                    console.log('手动刷新完成');
-                }, 1500);
+                }
             });
         });
     </script>
