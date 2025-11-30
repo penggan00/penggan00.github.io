@@ -1,0 +1,97 @@
+<!doctypehtml>
+    <html lang=en>
+    <meta charset=UTF-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <title>peng gan Blog</title>
+    <link href=styles.css rel=stylesheet>
+    <div class=header><a href=../../index.html>My Blog</a></div>
+    <div class=container>
+        <div class=subheader>
+            <h1>wireguard</h1>
+        </div>
+        <div class=date id=lastModified></div>
+        <div class=content>
+            <p>
+                在谷平台上搭建自用的可以通过以下步骤实现：
+
+            <p>步骤 1：注册云平台
+            <p>前往并注册一个账户。如果是首次使用，谷歌通常会提供一段时间的免费试用期和部分免费额度。
+                完成账户的创建和项目的设置。
+            <p>步骤 2：创建虚拟机实例
+                在 Google Cloud Console 中，导航到 Compute Engine > VM 实例。
+                点击 创建实例，填写必要的配置：
+            <p>名称: 自定义实例名称。
+                区域: 选择一个离你较近的区域。
+                机器类型: 可以选择较小的配置（如 e2-micro），以减少费用。
+                操作系统: 选择你熟悉的 Linux 发行版（如 Debian 或 Ubuntu）。
+                在“防火墙”部分，选中“允许 HTTP 流量”和“允许 HTTPS 流量”。
+                完成后，点击 创建。
+            <p>步骤 3：连接到虚拟机
+                虚拟机创建完成后，点击实例旁边的 SSH 按钮，通过浏览器直接连接到该实例。
+            <p>步骤 4：安装 VPN 服务
+                使用 SSH 连接到实例后，更新包管理器并安装必要的软件包：
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo -i
+sudo apt update
+sudo apt install -y wireguard</code></pre>
+            生成 WireGuard 配置文件。首先生成公钥和私钥：
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code># 生成服务器的私钥
+SERVER_PRIVATE_KEY=$(wg genkey)
+# 根据私钥生成公钥
+SERVER_PUBLIC_KEY=$(echo $SERVER_PRIVATE_KEY | wg pubkey)
+# 输出密钥以备后续使用
+echo "Server Private Key: $SERVER_PRIVATE_KEY"
+echo "Server Public Key: $SERVER_PUBLIC_KEY"</code></pre>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code># 生成客户端私钥
+CLIENT_PRIVATE_KEY=$(wg genkey) 
+# 生成客户端公钥
+CLIENT_PUBLIC_KEY=$(echo $CLIENT_PRIVATE_KEY | wg pubkey)    
+# 显示密钥
+echo "Client Private Key: $CLIENT_PRIVATE_KEY"
+echo "Client Public Key: $CLIENT_PUBLIC_KEY"</code></pre>
+            <b>服务器设置</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo nano /etc/wireguard/wg0.conf</code></pre>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>[Interface]
+Address = 10.0.0.1/24
+MTU = 1420
+SaveConfig = false
+PostUp = sysctl -w net.ipv4.ip_forward=1
+PostUp = iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE
+PostDown = iptables -t nat -D POSTROUTING -o ens4 -j MASQUERADE
+ListenPort = 端口
+PrivateKey = 服务器的私钥
+
+[Peer]
+PublicKey = 客户端的公钥
+AllowedIPs = 10.0.0.2/32
+
+[Peer]
+PublicKey = 客户端的公钥
+AllowedIPs = 10.0.0.3/32
+
+[Peer]
+PublicKey = 客户端的公钥
+AllowedIPs = 10.0.0.4/32</code></pre>
+            <b>启动 WireGuard 服务：</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo wg-quick up wg0</code></pre>
+            <b>设置开机自动启动：</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo systemctl enable wg-quick@wg0</code></pre>
+            <b>保存并重新启动 WireGuard 服务：</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo wg-quick down wg0
+sudo wg-quick up wg0</code></pre>
+
+            <b>配置客户端</b>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>[Interface]
+PrivateKey = <你的客户端私钥>
+Address = 10.0.0.2/24
+DNS = 1.1.1.1
+MTU = 1420
+
+[Peer]
+PublicKey = <服务器的公钥>
+Endpoint = <你的 GCP 实例的外部 IP 地址>:端口
+AllowedIPs = 0.0.0.0/0, ::/0</code></pre>
+
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>sudo wg</code></pre>
+
+            <script src=script.js></script>
+            <footer><a href=https://t.me/pg10086bot target=_blank>© 2024 peng gan. All rights reserved.</a></footer>

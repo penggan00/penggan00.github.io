@@ -1,0 +1,57 @@
+<!doctypehtml>
+    <html lang=en>
+    <meta charset=UTF-8>
+    <meta content="width=device-width,initial-scale=1" name=viewport>
+    <title>peng gan Blog</title>
+    <link href=styles.css rel=stylesheet>
+    <div class=header><a href=../../index.html>My Blog</a></div>
+    <div class=container>
+        <div class=subheader>
+            <h1>PassWall2</h1>
+        </div>
+        <div class=date id=lastModified></div>
+        <div class=content>
+            <p>
+
+            <h3 id="更新-PassWall"><a href="#更新-PassWall" class="headerlink" title="更新 PassWall"></a>更新 PassWall</h3>
+            <h4 id="版本介绍"><a href="#版本介绍" class="headerlink" title="版本介绍"></a>版本介绍</h4>
+            <p>sing-box 自 1.5.0-beta.2 后支持 Hysteria 2。</p>
+            <p>PassWall 最新的版本 4.71-2支持 sing-box 1.53。</p>
+            <p>PassWall 4.71-2基于 OpenWrt23.05-rc3 构建，如果你的 OpenWrt 版本不是很低，且不想升级或重刷 OpenWrt的固件的情况下使用Hysteria2， 那请看这篇教程。
+            </p>
+            <p>建议提前做好备份，博主 Openwrt 版本 21.02 没有问题。如果版本太低会带来不可预知的依赖问题。</p>
+            <h4 id="检查现有-passwall-是否支持-hysteria2"><a href="#检查现有-passwall-是否支持-hysteria2" class="headerlink"
+                    title="检查现有 passwall 是否支持 hysteria2"></a>检查现有 passwall 是否支持 hysteria2</h4>
+            <p>是否含 Hysteria 2 及 sing-box。</p>
+            <h4 id="下载最新-passwall-及组件包"><a href="#下载最新-passwall-及组件包" class="headerlink"
+                    title="下载最新 passwall 及组件包"></a>下载最新 passwall 及组件包</h4>
+            <p><a href="https://github.com/xiaorouji/openwrt-passwall/releases" target="_blank"
+                    rel="noopener">openwrt-passwall 最新发布页</a></p>
+            <p><a href="https://github.com/xiaorouji/openwrt-passwall/issues/2786" target="_blank" rel="noopener">依赖包
+                    luci-lua-runtime</a></p>
+            <p><a href="/downloads/luci-lua-runtime_all_fake.zip" target="_blank">依赖包本站备份</a></p>
+
+
+            <ul>
+                <li>软件包 luci-app-passwall_4.71-2_all.ipk</li>
+                <li>中文包 luci-i18n-passwall-zh-cn_git-23.289.45328-a953315_all.ipk</li>
+                <li>对应CPU构架的组件包 passwall_packages_ipk_x86_64 注意构架</li>
+                <li><a href="https://github.com/xiaorouji/openwrt-passwall/issues/2786" target="_blank"
+                        rel="noopener">依赖包 luci-lua-runtime</a> Openwrt 23.05-rc3 以下版本需要</li>
+            </ul>
+            <p><strong>查询软路由CPU构架</strong></p>
+            <p>SSH 连接软路由，输入如下命令</p>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code>uname -m</code></pre>
+            <p>例如我的输出 x86_64</p>
+            <pre><button class="copy-button" onclick="copyToClipboard(this)">复制</button><code># 进入安装包所在目录</span></span><br><span class="built_in">cd</span> /tmp/upload</span><br># 查看目录下所有文件</span></span><br>ls</span><br># 解压安装包</span></span><br>unzip luci-lua-runtime_all_fake.zip</span><br>unzip passwall_packages_ipk_aarch64_cortex-a53.zip</span><br># 清屏</span></span><br>clear</span><br># 查看目录下所有文件</span></span><br>ls</span><br># 安装所有软件包</span></span><br>opkg install *.ipk --force-reinstall</code></pre>
+            <p>输出提示 sing-box没有安装上，没有关系，我们回到网页 Passwall 更新组件即可。</p>
+            <h4 id="添加-Hysteria2-节点"><a href="#添加-Hysteria2-节点" class="headerlink" title="添加 Hysteria2 节点"></a>添加
+                Hysteria2 节点</h4>
+            <p>参照视频即可</p>
+
+
+        </div>
+
+    </div>
+    <script src=script.js></script>
+    <footer><a href=https://t.me/pg10086bot target=_blank>© 2024 peng gan. All rights reserved.</a></footer>
