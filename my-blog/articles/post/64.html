@@ -126,25 +126,6 @@
             color: var(--primary-color);
         }
         
-        .stats-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            margin-bottom: 1.5rem;
-        }
-        
-        .stats-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .stats-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
         @media (max-width: 768px) {
             .table-container {
                 overflow-x: auto;
@@ -170,7 +151,7 @@
                 <div class="col-md-4 text-md-end">
                     <div class="d-inline-block bg-white text-dark p-2 rounded">
                         <small class="text-muted">下次更新:</small>
-                        <span id="countdown" class="fw-bold">37秒</span>
+                        <span id="countdown" class="fw-bold">60秒</span>
                     </div>
                 </div>
             </div>
@@ -178,39 +159,11 @@
     </header>
 
     <div class="container">
-        <!-- 统计数据 -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <div class="stats-value" id="total-products">3</div>
-                    <div class="stats-label">总产品数</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <div class="stats-value" id="vps-count">2</div>
-                    <div class="stats-label">VPS产品</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <div class="stats-value" id="sc2-count">1</div>
-                    <div class="stats-label">SC2产品</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card text-center">
-                    <div class="stats-value" id="sale-count">1</div>
-                    <div class="stats-label">特价产品</div>
-                </div>
-            </div>
-        </div>
-
         <!-- 刷新信息 -->
         <div class="refresh-info">
             <div>
                 <i class="fas fa-sync-alt me-2"></i>
-                <span>数据将自动刷新，确保您看到最新的优惠信息</span>
+                <span>数据将每分钟自动刷新，确保您看到最新的优惠信息</span>
             </div>
             <button id="manualRefresh" class="btn btn-sm btn-outline-primary">
                 <i class="fas fa-redo me-1"></i> 立即刷新
@@ -376,12 +329,46 @@
             `;
         }
 
-        // 更新统计数据
-        function updateStats(products) {
-            document.getElementById('total-products').textContent = products.length;
-            document.getElementById('vps-count').textContent = products.filter(p => p.type === 'vps').length;
-            document.getElementById('sc2-count').textContent = products.filter(p => p.type === 'sc2').length;
-            document.getElementById('sale-count').textContent = products.filter(p => p.hasFlashSale).length;
+        // 刷新数据函数
+        function refreshData() {
+            // 在实际应用中，这里应该重新调用API获取数据
+            console.log('执行自动刷新...');
+            
+            // 模拟API调用
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = '更新中...';
+            
+            setTimeout(() => {
+                // 模拟API调用完成
+                // 重新渲染产品（在实际应用中应该使用新的API数据）
+                renderProducts();
+                console.log('数据更新完成');
+            }, 1000);
+        }
+
+        // 倒计时功能 - 每分钟整刷新
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            
+            function updateCountdown() {
+                const now = new Date();
+                const secondsUntilNextMinute = 60 - now.getSeconds();
+                
+                countdownElement.textContent = `${secondsUntilNextMinute}秒`;
+                
+                if (secondsUntilNextMinute <= 0) {
+                    // 每分钟整点触发刷新
+                    refreshData();
+                }
+            }
+            
+            // 立即更新一次
+            updateCountdown();
+            
+            // 每秒更新倒计时
+            const timer = setInterval(updateCountdown, 1000);
+            
+            return timer;
         }
 
         // 渲染产品
@@ -396,9 +383,6 @@
             products.forEach(product => {
                 tableBody.innerHTML += generateTableHTML(product);
             });
-            
-            // 更新统计数据
-            updateStats(products);
         }
 
         // 筛选产品
@@ -417,36 +401,13 @@
             });
         }
 
-        // 倒计时功能
-        function startCountdown(seconds) {
-            let countdown = seconds;
-            const countdownElement = document.getElementById('countdown');
-            
-            const timer = setInterval(() => {
-                countdownElement.textContent = `${countdown}秒`;
-                countdown--;
-                
-                if (countdown < 0) {
-                    clearInterval(timer);
-                    // 在实际应用中，这里应该重新调用API获取数据
-                    countdownElement.textContent = '更新中...';
-                    setTimeout(() => {
-                        // 模拟API调用完成
-                        countdownElement.textContent = `${apiData.__data.ttr}秒`;
-                        startCountdown(apiData.__data.ttr);
-                        renderProducts(); // 重新渲染产品
-                    }, 2000);
-                }
-            }, 1000);
-        }
-
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
             // 渲染产品
             renderProducts();
             
-            // 启动倒计时
-            startCountdown(apiData.__data.ttr);
+            // 启动每分钟整刷新倒计时
+            startCountdown();
             
             // 筛选按钮事件
             document.querySelectorAll('.filter-buttons .btn').forEach(button => {
@@ -477,11 +438,7 @@
                     
                     // 重新渲染产品（在实际应用中应该使用新的API数据）
                     renderProducts();
-                    
-                    // 重置倒计时
-                    const countdownElement = document.getElementById('countdown');
-                    countdownElement.textContent = `${apiData.__data.ttr}秒`;
-                    startCountdown(apiData.__data.ttr);
+                    console.log('手动刷新完成');
                 }, 1500);
             });
         });
