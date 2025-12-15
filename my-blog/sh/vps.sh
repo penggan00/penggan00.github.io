@@ -1,12 +1,10 @@
+#!/bin/bash
 # 一键安装所有常用工具（包含UFW防火墙）
 sudo apt update -y && \
 sudo apt upgrade -y && \
 sudo apt install -y --no-install-recommends \
-  curl wget git htop tmux zip unzip net-tools nano vim \
-  python3-venv python3-pip postgresql-client mysql-client \
-  tree ncdu screen jq pv rsync dstat iftop iotop \
-  ca-certificates apt-transport-https software-properties-common \
-  ufw fail2ban \
+  curl wget git htop tmux zip unzip nano \
+  tree ncdu jq rsync ca-certificates ufw \
   && echo "✅ 所有工具安装完成！"
 # 在 Ubuntu 上，你可以使用以下命令安装 Docker：
 apt install -y docker.io
@@ -34,3 +32,73 @@ echo "net.ipv4.tcp_keepalive_intvl = 30" | sudo tee -a /etc/sysctl.conf && \
 echo "net.ipv4.tcp_keepalive_probes = 3" | sudo tee -a /etc/sysctl.conf && \
 sudo sysctl -p
 echo -e "Host *\n  ServerAliveInterval 50\n  ServerAliveCountMax 3\n  TCPKeepAlive yes" >> ~/.ssh/config
+
+# 一键1g虚拟内存
+sudo bash -c 'dd if=/dev/zero of=/swapfile bs=1M count=1024 && \
+chmod 600 /swapfile && \
+mkswap /swapfile && \
+swapon /swapfile && \
+echo "/swapfile none swap sw 0 0" >> /etc/fstab && \
+echo "1GB Swap 已启用！当前内存状态：" && \
+free -h'
+
+# 修改SSH配置文件
+sed -i 's/^#Port 22/Port 222/;s/^Port.*/Port 222/;s/^PermitRootLogin.*/PermitRootLogin prohibit-password/;s/^PasswordAuthentication.*/PasswordAuthentication no/;s/^ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/;s/^PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# 确保端口配置存在
+grep -q "^Port 222" /etc/ssh/sshd_config || echo "Port 222" >> /etc/ssh/sshd_config
+
+# 处理配置文件目录
+[ -f /etc/ssh/sshd_config.d/50-cloud-init.conf ] && sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/;s/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+
+# 设置SSH密钥目录
+mkdir -p /root/.ssh && chmod 700 /root/.ssh
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7CSx0TIrYmnc6X9BNi/vRd2BbNDhobptIrMPzC1P2t2V10qvhlJEoxmcOxZPqrqZHBXdOCCnyJJIB3lF6aLAWqPlHoWyfH0SY//PTJUTX2udlteCVkNunI8Ew0rUy0XN2dNBETCrER2Gfo0N6sYzHbaMlIV/IPb5HzksrgnsJm6R+j2TJwlcu5eXa49nzdAChSuYePjLe6Yfm8tsfhAMfuJrdPTIcn6m8WRW8rrk9wH3Vu8fPvvno/f744fnm4b/uwO7LQSiYKIx1AfFEkKdJjTYP0+aU1i2J+rvNRUct5gX/m/sevsSeApcj6gjZ/ZtMtWKCl+BuLdH3caigLKGX" > /root/.ssh/authorized_keys
+chmod 600 /root/.ssh/authorized_keys
+
+sudo ufw allow 222
+# 重启SSH服务
+systemctl restart sshd
+
+# 显示配置结果
+echo "=== SSH配置完成 ==="
+echo ""
+echo "当前配置："
+grep -E "^(Port|PasswordAuthentication|PubkeyAuthentication|PermitRootLogin)" /etc/ssh/sshd_config
+echo ""
+echo "服务状态："
+systemctl status sshd --no-pager | grep "Active:"
+echo ""
+echo "=== 连接方式 ==="
+echo "ssh -p 222 -o PasswordAuthentication=no root@$(hostname -I | awk '{print $1}')"
+echo ""
+echo "请使用另一个终端测试连接！"
+
+# 检查当前开放的端口
+echo "[2/6] 检查当前开放的端口 (ss -tulnp)..."
+ss -tulnp
+
+# 允许 SSH (22)、HTTP (80)、HTTPS (443)
+echo "[3/6] 允许 SSH (22，222)、HTTP (80)、HTTPS (443)..."
+sudo ufw allow 22
+sudo ufw allow 222
+sudo ufw allow 80
+sudo ufw allow 443
+
+# 启用 ufw 并设置开机自启
+echo "[4/6] 启用 ufw 并设置开机自启..."
+sudo ufw enable
+sudo systemctl enable ufw
+
+# 检查 ufw 状态
+echo "[5/6] 检查 ufw 状态..."
+sudo ufw status
+
+# 检查 ufw 是否开机自启
+echo "[6/6] 检查 ufw 是否开机自启..."
+systemctl is-enabled ufw
+
+echo "✅ ufw 防火墙配置完成！"
+echo "sudo ufw allow 222"
+
+
