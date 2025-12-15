@@ -43,13 +43,10 @@ echo "1GB Swap 已启用！当前内存状态：" && \
 free -h'
 
 # 修改SSH配置文件
-sed -i 's/^#Port 22/Port 222/;s/^Port.*/Port 222/;s/^PermitRootLogin.*/PermitRootLogin prohibit-password/;s/^PasswordAuthentication.*/PasswordAuthentication no/;s/^ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/;s/^PubkeyAuthentication.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+sudo sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/; s/^#*ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/; s/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/; s/^#*PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 
-# 确保端口配置存在
-grep -q "^Port 222" /etc/ssh/sshd_config || echo "Port 222" >> /etc/ssh/sshd_config
-
-# 处理配置文件目录
-[ -f /etc/ssh/sshd_config.d/50-cloud-init.conf ] && sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/;s/ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+# 确保222端口配置存在
+sed -i 's/^#Port 22$/Port 222/; s/^Port 22$/Port 222/; s/^#Port 222$/Port 222/' /etc/ssh/sshd_config
 
 # 设置SSH密钥目录
 mkdir -p /root/.ssh && chmod 700 /root/.ssh
@@ -58,21 +55,8 @@ chmod 600 /root/.ssh/authorized_keys
 
 sudo ufw allow 222
 # 重启SSH服务
-systemctl restart sshd
-
-# 显示配置结果
-echo "=== SSH配置完成 ==="
-echo ""
-echo "当前配置："
-grep -E "^(Port|PasswordAuthentication|PubkeyAuthentication|PermitRootLogin)" /etc/ssh/sshd_config
-echo ""
-echo "服务状态："
-systemctl status sshd --no-pager | grep "Active:"
-echo ""
-echo "=== 连接方式 ==="
-echo "ssh -p 222 -o PasswordAuthentication=no root@$(hostname -I | awk '{print $1}')"
-echo ""
-echo "请使用另一个终端测试连接！"
+sudo systemctl restart ssh
+sudo systemctl restart sshd
 
 # 检查当前开放的端口
 echo "[2/6] 检查当前开放的端口 (ss -tulnp)..."
@@ -100,5 +84,6 @@ systemctl is-enabled ufw
 
 echo "✅ ufw 防火墙配置完成！"
 echo "sudo ufw allow 222"
-
+# 查看所有认证相关配置
+grep -E "^(PasswordAuthentication|PubkeyAuthentication|ChallengeResponseAuthentication|PermitRootLogin)" /etc/ssh/sshd_config
 
