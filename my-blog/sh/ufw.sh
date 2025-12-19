@@ -9,12 +9,14 @@ sudo apt install ufw -y
 echo "[2/6] 检查当前开放的端口 (ss -tulnp)..."
 ss -tulnp
 
-# 允许 SSH (22)、HTTP (80)、HTTPS (443)
-echo "[3/6] 允许 SSH (22，222)、HTTP (80)、HTTPS (443)..."
-sudo ufw allow 22
+echo "[3/6] 允许 222 80 443 53 123 12000"
+# sudo ufw allow 22
 sudo ufw allow 222
 sudo ufw allow 80
 sudo ufw allow 443
+sudo ufw allow 53
+sudo ufw allow 123
+sudo ufw allow 12000
 
 # 启用 ufw 并设置开机自启
 echo "[4/6] 启用 ufw 并设置开机自启..."

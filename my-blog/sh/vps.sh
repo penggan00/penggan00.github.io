@@ -1,5 +1,5 @@
 #!/bin/bash
-# bash <(curl -sL https://raw.githubusercontent.com/penggan00/penggan00.github.io/main/my-blog/sh/vps.sh) "ssh-rsa AAAAB3NzaC1yc2E... your_email@example.com""
+# bash <(curl -sL https://raw.githubusercontent.com/penggan00/penggan00.github.io/main/my-blog/sh/vps.sh) "ssh-rsa AAAAB3NzaC1yc2E... your_email@example.com"
 
 SSH_PUBKEY="$1"
 
