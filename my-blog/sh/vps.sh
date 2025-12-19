@@ -1,24 +1,8 @@
 #!/bin/bash
+# bash <(curl -sL https://raw.githubusercontent.com/penggan00/penggan00.github.io/main/my-blog/sh/vps.sh) "ssh-rsa AAAAB3NzaC1yc2E... your_email@example.com""
 
-# 检查是否提供了公钥参数
-if [ $# -eq 0 ]; then
-    echo "错误: 请提供SSH公钥作为参数"
-    echo "用法: bash <(curl -sL https://raw.githubusercontent.com/penggan00/penggan00.github.io/main/my-blog/sh/vps.sh) "ssh-rsa AAAAB3NzaC1yc2E... your_email@example.com""
-    exit 1
-fi
-a
 SSH_PUBKEY="$1"
 
-# 检查公钥格式（简单验证）
-if [[ ! "$SSH_PUBKEY" =~ ^(ssh-rsa|ssh-ed25519|ecdsa-sha2-nistp|ssh-dss) ]]; then
-    echo "警告: 提供的公钥格式可能不正确，但将继续执行..."
-    echo "公钥开头: ${SSH_PUBKEY:0:50}..."
-fi
-
-echo "正在配置SSH..."
-echo "使用的公钥指纹（前50字符）: ${SSH_PUBKEY:0:50}..."
-
-# 修改SSH配置文件
 echo "修改SSH配置文件..."
 sudo sed -i '/^#*PasswordAuthentication/c\PasswordAuthentication no' /etc/ssh/sshd_config
 sudo sed -i '/^#*PubkeyAuthentication/c\PubkeyAuthentication yes' /etc/ssh/sshd_config
@@ -123,14 +107,10 @@ echo "vm.swappiness=10" | sudo tee /etc/sysctl.d/99-swap.conf
 sudo sysctl -p /etc/sysctl.d/99-swap.conf
 
 # 安装BBR（可选）
-echo "是否安装BBR加速？(y/N)"
-read -t 10 -n 1 install_bbr
-if [[ "$install_bbr" =~ [yY] ]]; then
-    echo "安装BBR..."
-    wget --no-check-certificate -O /opt/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
-    chmod +x /opt/bbr.sh
-    /opt/bbr.sh
-fi
+echo "正在安装BBR加速..."
+wget --no-check-certificate -O /opt/bbr.sh https://raw.githubusercontent.com/penggan00/penggan00.github.io/main/my-blog/sh/bbr.sh
+chmod +x /opt/bbr.sh
+/opt/bbr.sh
 
 echo ""
 echo "✅ 所有配置完成！"
