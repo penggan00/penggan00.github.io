@@ -1,48 +1,36 @@
 #!/bin/bash
-set -e  # Exit immediately if any command fails
+# b2.sh - 安全安装脚本
 
-# 安装必要依赖（包括 unzip）
-echo "正在安装系统依赖..."
-sudo apt-get update
-sudo apt-get install -y curl gnupg2 unzip  # 明确添加 unzip
+# 使用环境变量传递密钥
+B2_ACCOUNT=${B2_ACCOUNT:-""}
+B2_KEY=${B2_KEY:-""}
 
-# 安装rclone（如果未安装）
-if ! command -v rclone &> /dev/null; then
-    echo "正在安装rclone..."
-    curl -sS https://rclone.org/install.sh | sudo bash
-fi
-
-# 检查并加载环境变量文件
-ENV_FILE="/root/rss/.env"
-if [ ! -f "$ENV_FILE" ]; then
-    echo "错误: 环境变量文件 $ENV_FILE 不存在" >&2
-    exit 1
-fi
-
-# 安全加载环境变量（限制变量范围）
-echo "正在加载环境变量..."
-B2_ACCOUNT=""
-B2_KEY=""
-source "$ENV_FILE"
-
+# 检查环境变量是否设置
 if [ -z "$B2_ACCOUNT" ] || [ -z "$B2_KEY" ]; then
-    echo "错误: 必须设置 B2_ACCOUNT 和 B2_KEY 环境变量" >&2
+    echo "错误: 请设置环境变量 B2_ACCOUNT 和 B2_KEY"
+    echo "示例:"
+    echo "  export B2_ACCOUNT='004a627211a03ba0000000004'"
+    echo "  export B2_KEY='K004C/ukGLV6UyBDTNXyqf8R6QRy9mA'"
+    echo "  bash <(curl -sL https://raw.githubusercontent.com/.../b2.sh)"
     exit 1
 fi
 
-# 创建配置文件
-echo "正在创建rclone配置文件..."
+# 安装流程
+sudo apt update && sudo apt install unzip -y
+curl https://rclone.org/install.sh | sudo bash
+
+# 创建配置目录
 mkdir -p ~/.config/rclone
+
+# 使用环境变量创建配置文件
 cat > ~/.config/rclone/rclone.conf <<EOF
 [penggan]
 type = b2
-account = $B2_ACCOUNT
-key = $B2_KEY
+account = ${B2_ACCOUNT}
+key = ${B2_KEY}
 EOF
+
 chmod 600 ~/.config/rclone/rclone.conf
 
-# 验证安装和配置
-echo -e "\n验证安装结果："
-rclone --version && echo "rclone 安装成功!" || echo "rclone 安装失败!"
-echo "配置文件路径： ~/.config/rclone/rclone.conf"
-echo "无需重启系统，但如果是首次安装，请重新打开终端或运行 'source ~/.bashrc'"
+echo "安装完成！"
+rclone config show penggan
