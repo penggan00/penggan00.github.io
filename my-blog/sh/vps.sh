@@ -65,10 +65,13 @@ curl -fsSL https://get.docker.com | sh
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# 设置时区
-echo "设置时区..."
-sudo timedatectl set-timezone Asia/Singapore
-sudo timedatectl set-local-rtc 0
+# 完整的时区设置
+apt-get update && apt-get install -y systemd-timesyncd
+sudo timedatectl set-timezone Asia/Singapore && \
+sudo timedatectl set-local-rtc 0 && \
+sudo timedatectl set-ntp true && \
+echo "✅ 时区设置完成" && \
+timedatectl status
 
 # 配置SSH保活
 echo "配置SSH保活..."

@@ -8,9 +8,6 @@ B2_KEY=${B2_KEY:-""}
 # 检查环境变量是否设置
 if [ -z "$B2_ACCOUNT" ] || [ -z "$B2_KEY" ]; then
     echo "错误: 请设置环境变量 B2_ACCOUNT 和 B2_KEY"
-    echo "示例:"
-    echo "  export B2_ACCOUNT='004a627211a03ba0000000004'"
-    echo "  export B2_KEY='K004C/ukGLV6UyBDTNXyqf8R6QRy9mA'"
     echo "  bash <(curl -sL https://raw.githubusercontent.com/.../b2.sh)"
     exit 1
 fi
