@@ -22,49 +22,49 @@ show_menu() {
 # 恢复RSS服务
 restore_rss() {
     echo "恢复RSS服务..."
-    cd ~ && rclone cat penggan:penggan/rss-backup.tar.gz | tar -xzf - && cd ~/rss
+    cd ~ && rclone cat penggan:penggan/rss.tar.gz | tar -xzf - && cd ~/rss
     echo "✓ RSS服务恢复完成"
 }
 
 # 恢复博客服务
 restore_blog() {
     echo "恢复博客服务..."
-    cd ~ && rclone cat penggan:penggan/myblog-backup.tar.gz | tar -xzf - && cd ~/myblog && git clone https://github.com/penggan00/penggan00.github.io.git && mv penggan00.github.io blog
+    cd ~ && rclone cat penggan:penggan/myblog.tar.gz | tar -xzf - && cd ~/myblog && git clone https://github.com/penggan00/penggan00.github.io.git && mv penggan00.github.io blog
     echo "✓ 博客服务恢复完成"
 }
 
 # 恢复RSSTT服务
 restore_rsstt() {
     echo "恢复RSSTT服务..."
-    cd ~ && rclone cat penggan:penggan/rsstt-backup.tar.gz | tar -xzf - && cd ~/rsstt
+    cd ~ && rclone cat penggan:penggan/rsstt.tar.gz | tar -xzf - && cd ~/rsstt
     echo "✓ RSSTT服务恢复完成"
 }
 
 # 恢复Aria2服务
 restore_aria2() {
     echo "恢复Aria2服务..."
-    cd ~ && rclone cat penggan:penggan/aria2-backup.tar.gz | tar -xzf - && cd ~/aria2
+    cd ~ && rclone cat penggan:penggan/aria2.tar.gz | tar -xzf - && cd ~/aria2
     echo "✓ Aria2服务恢复完成"
 }
 
 # 恢复OpenAList服务
 restore_openalsit() {
     echo "恢复OpenAList服务..."
-    cd ~ && rclone cat penggan:penggan/openalsit-backup.tar.gz | tar -xzf - && cd ~/openalsit && docker-compose up -d
+    cd ~ && rclone cat penggan:penggan/openalsit.tar.gz | tar -xzf - && cd ~/openalsit && docker-compose up -d
     echo "✓ OpenAList服务恢复完成并启动"
 }
 
 # 恢复RSSHub服务
 restore_rsshub() {
     echo "恢复RSSHub服务..."
-    cd ~ && rclone cat penggan:penggan/rsshub-backup.tar.gz | tar -xzf - && cd ~/rsshub && docker-compose up -d
+    cd ~ && rclone cat penggan:penggan/rsshub.tar.gz | tar -xzf - && cd ~/rsshub && docker-compose up -d
     echo "✓ RSSHub服务恢复完成并启动"
 }
 
 # 恢复NPM服务
 restore_npm() {
     echo "恢复Nginx Proxy Manager服务..."
-    cd ~ && rclone cat penggan:penggan/npm-backup.tar.gz | tar -xzf - && cd ~/nginx-proxy-manager && docker-compose up -d
+    cd ~ && rclone cat penggan:penggan/npm.tar.gz | tar -xzf - && cd ~/nginx-proxy-manager && docker-compose up -d
     echo "✓ Nginx Proxy Manager服务恢复完成并启动"
 }
 
