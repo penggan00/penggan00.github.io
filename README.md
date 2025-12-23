@@ -1,4 +1,6 @@
-[Hux Blog](https://huangxuan.me)
+mkdir ~/myblog
+cd myblog
+git clone https://github.com/penggan00/penggan00.github.io.git && mv penggan00.github.io blog
 ================================
 
 > I never expected this to become popular.

@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  blog:
+    image: httpd:alpine
+    container_name: blog
+    restart: unless-stopped
+    volumes:
+      - ./blog:/usr/local/apache2/htdocs
+    expose:
+      - "80"
+    networks:
+      - nginx-proxy-manager_default
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'      # 最多使用 0.5 个 CPU 核心
+          memory: 128M     # 内存上限 128MB
+        reservations:
+          memory: 64M      # 内存保留 64MB
+
+networks:
+  nginx-proxy-manager_default:
+    external: true
