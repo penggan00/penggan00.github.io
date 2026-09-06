@@ -1,0 +1,19 @@
+name: Sync GitHub to HuggingFace pg Space
+on:
+  push:
+    branches: [ main ] #监听main分支推送
+  workflow_dispatch: #支持网页手动运行
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取GitHub仓库代码
+        uses: actions/checkout@v6
+
+      - name: 同步到 HuggingFace Static Space penggan0/pg
+        uses: huggingface/hub-sync@v0.1.0
+        with:
+          huggingface_repo_id: penggan0/pg
+          hf_token: ${{ secrets.HF_TOKEN }}
+          space_sdk: static
