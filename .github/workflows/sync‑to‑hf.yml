@@ -1,30 +1,19 @@
-name: Sync GitHub to HuggingFace Space
+name: Sync GitHub to HuggingFace pg Space
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ main ] #监听main分支推送
+  workflow_dispatch: #支持网页手动运行
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: 拉取代码
-        uses: actions/checkout@v4
+      - name: 拉取GitHub仓库代码
+        uses: actions/checkout@v6
 
-      - name: 推送到 Hugging Face（详细输出）
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git remote add hf https://penggan00:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/penggan0/pg
-          echo "=== 开始推送 ==="
-          git push -f hf main 2>&1
-          echo "=== 推送完成 ==="
-        continue-on-error: true  # 即使失败也继续显示日志
-
-      - name: 显示推送结果
-        if: always()
-        run: |
-          echo "=== Git 状态 ==="
-          git status
-          echo "=== 远程地址 ==="
-          git remote -v
+      - name: 同步到 HuggingFace Static Space penggan0/pg
+        uses: huggingface/hub-sync@v0.1.0
+        with:
+          huggingface_repo_id: penggan0/pg
+          hf_token: ${{ secrets.HF_TOKEN }}
+          space_sdk: static
